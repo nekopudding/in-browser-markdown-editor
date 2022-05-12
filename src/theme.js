@@ -2,6 +2,7 @@ import { createTheme } from "@mui/material";
 
 const main = '#ef6643';
 const theme = createTheme({
+  mode: 'dark',
   palette: {
     clr100: '#ffffff',
     clr200: '#f5f5f5',
@@ -14,6 +15,9 @@ const theme = createTheme({
     clr900: '#1d1f22',
     clr1000: '#151619',
 
+    background: {
+      default: '#ffffff'
+    },
     primary: {
       main: main,
       light: '#f39765'
@@ -78,11 +82,6 @@ const theme = createTheme({
       fontWeight: 400,
       lineHeight: '24px'
     }
-    
-
-
-
-
   }
 })
 

@@ -1,6 +1,8 @@
 import React from 'react'
-import {CssBaseline, ThemeProvider, Typography} from '@mui/material'
+import {Box, CssBaseline, ThemeProvider, Typography} from '@mui/material'
 import theme from 'theme';
+import Button from 'components/Button';
+import Toggle from 'components/Toggle';
 
 function App() {
   return (
@@ -14,6 +16,12 @@ function App() {
       <Typography variant='h4'>H1</Typography>
       <Typography variant='h5'>H1</Typography>
       <Typography variant='h6'>H1</Typography>
+      <Typography variant='bodyMono'>Body Mono asdjfklsda</Typography>
+      <Button>Save Changes</Button>
+      <Box sx={{bgcolor: theme.palette.clr900}}>
+        <Toggle/>
+      </Box>
+
     </ThemeProvider>
    </>
   )
