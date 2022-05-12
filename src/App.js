@@ -1,31 +1,22 @@
+import React from 'react'
+import {CssBaseline, ThemeProvider, Typography} from '@mui/material'
+import theme from 'theme';
+
 function App() {
   return (
-    <div className="App">
-      {/* <!-- Sidebar start --> */}
-
-      My Documents
-
-      New Document
-
-      {/* <!-- Sidebar end -->*/}
-
-      {/*<!-- Header start --> */}
-
-      Document Name
-
-      Save Changes
-
-      {/* <!-- Header end -->*/}
-
-      {/*<!-- Main start --> */}
-
-      Markdown
-
-      Preview
-
-      {/* <!-- Main end --> */}
-    </div>
-  );
+   <>
+    <ThemeProvider theme={theme}>
+      <CssBaseline/>
+      <Typography variant="inAppHeadingM">In App Heading M</Typography>
+      <Typography variant='h1'>H1</Typography>
+      <Typography variant='h2'>H1</Typography>
+      <Typography variant='h3'>H1</Typography>
+      <Typography variant='h4'>H1</Typography>
+      <Typography variant='h5'>H1</Typography>
+      <Typography variant='h6'>H1</Typography>
+    </ThemeProvider>
+   </>
+  )
 }
 
 export default App;
