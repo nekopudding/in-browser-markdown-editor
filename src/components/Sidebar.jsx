@@ -46,8 +46,8 @@ function Sidebar(props) {
             }}
           >
             {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-              <ListItem key={text} disablePadding sx={{pl: 3, py: 1.5}}>
-                <ListItemButton sx={{p: 0}}>
+              <ListItem key={text} disablePadding sx={{pl: 3}}>
+                <ListItemButton sx={{p: 0, py: 1.5}}>
                   <ListItemIcon sx={{minWidth: 30}}>
                     <DocumentIcon />
                   </ListItemIcon>
