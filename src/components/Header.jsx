@@ -1,9 +1,13 @@
-import { AppBar,Toolbar,IconButton,Typography, Box, Divider } from '@mui/material'
+import { AppBar,Toolbar,IconButton,Typography, Box, Divider, ListItem, ListItemButton, ListItemIcon, ListItemText, Input } from '@mui/material'
 import React from 'react'
 import {ReactComponent as MenuIcon} from 'assets/icon-menu.svg';
 import {ReactComponent as CloseIcon} from 'assets/icon-close.svg';
 import {ReactComponent as Logo} from 'assets/logo.svg';
+import {ReactComponent as DocumentIcon} from 'assets/icon-document.svg'
+import {ReactComponent as SaveIcon} from 'assets/icon-save.svg'
+import {ReactComponent as DeleteIcon} from 'assets/icon-delete.svg'
 import theme from 'theme';
+import Button from './Button';
 
 function Header(props) {
   const {drawerWidth, open, setOpen} = props;
@@ -24,7 +28,10 @@ function Header(props) {
               borderRadius: 0,
               width: '72px',
               height: '72px',
-              bgcolor: theme.palette.clr700
+              bgcolor: theme.palette.clr700,
+              "&:hover": {
+                bgcolor: theme.palette.primary.main
+              }
             }}
           >
             {open ? <CloseIcon/> : <MenuIcon/>}
@@ -32,10 +39,60 @@ function Header(props) {
           <Box sx={{ m: 3 }}>
             <Logo/>               
           </Box>
-          <Divider orientation='vertical' sx={{borderColor: theme.palette.clr600, width: '1px', height: '40px', borderWidth: '1px'}}/>
-          <Typography variant="h4" noWrap component="div">
-            Persistent drawer
-          </Typography>
+          <Divider orientation='vertical' sx={{borderColor: theme.palette.clr600, width: '1px', height: '40px', borderWidth: '0 1px 0 0'}}/>
+          <ListItem 
+            disablePadding 
+            sx={{pl: 3, py: 1.5}}
+            secondaryAction={
+              <Box sx={{display: 'flex', alignItems: 'center'}}>
+              <IconButton 
+                sx={{
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  m: 1.5, p:1.5, 
+                  borderRadius: '22px',
+                  "& *": { fill: theme.palette.clr500 },
+                  "&:hover *": { fill: theme.palette.primary.main }
+                }}>
+                <DeleteIcon/>
+              </IconButton>
+              <Button sx={{height: '40px'}}>
+                <Box sx={{display: 'flex',alignItems: 'center', '& > * + *': {ml: 1}}}>
+                  <SaveIcon/> 
+                  <span>Save Changes</span>
+                </Box>
+              </Button>
+              </Box>
+            }
+          >
+            <ListItemIcon sx={{minWidth: 30}}>
+              <DocumentIcon />
+            </ListItemIcon>
+            <ListItemText 
+              primary={"Document Name"} 
+              primaryTypographyProps={{variant: "inAppBodyM", sx: {color: theme.palette.clr500}}}
+              secondary={
+                <Input 
+                  defaultValue='welcome.md' 
+                  inputProps={{ 
+                    'aria-label': 'description', 
+                    variant: "inAppHeadingM",
+                    sx: {
+                      color: theme.palette.clr100,
+                      ...theme.typography.inAppHeadingM,
+                    } 
+                  }}
+                />
+              } 
+              sx={{
+                m: 0, 
+                '& .MuiInput-underline:after': {
+                  borderBottomColor: theme.palette.clr100,
+                  borderWidth: '0 0 1px 0'
+                },
+              }}
+            />
+          </ListItem>
         </Toolbar>
       </AppBar>
    </>

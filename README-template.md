@@ -67,6 +67,18 @@ Then crop/optimize/edit your image however you like, add it to your project, and
 
 ### What I learned
 - vertical aligh using display flex and align item center
+- decomposing the darkMode toggle button to customize by inspecting
+- setting hover color of icon when hovering over the button (Header.jsx)
+```js
+"&:hover *": { fill: theme.palette.primary.main }
+```
+- changing border color of input field https://stackoverflow.com/questions/52911169/how-to-change-the-border-color-of-mui-textfield
+```js
+'& .MuiInput-underline:after': {
+  borderBottomColor: theme.palette.clr100,
+  borderWidth: '0 0 1px 0'
+},
+```
 Use this section to recap over some of your major learnings while working through this project. Writing these out and providing code samples of areas you want to highlight is a great way to reinforce your own knowledge.
 
 To see how you can add code snippets, see below:

@@ -1,7 +1,7 @@
 import { Drawer,Divider, Box, Typography, ListItem,List,ListItemIcon,ListItemButton, ListItemText, Stack,Switch, FormGroup, FormControlLabel } from '@mui/material'
 import React from 'react';
 import theme from 'theme';
-import documentIcon from 'assets/icon-document.svg'
+import {ReactComponent as DocumentIcon} from 'assets/icon-document.svg'
 import Button from './Button';
 import ModeToggle from './ModeToggle';
 
@@ -49,13 +49,16 @@ function Sidebar(props) {
               <ListItem key={text} disablePadding sx={{pl: 3, py: 1.5}}>
                 <ListItemButton sx={{p: 0}}>
                   <ListItemIcon sx={{minWidth: 30}}>
-                    <img src={documentIcon} alt='document icon'/>
+                    <DocumentIcon />
                   </ListItemIcon>
                   <ListItemText 
                     primary={"01 April 2022"} 
                     primaryTypographyProps={{variant: "inAppBodyM", sx: {color: theme.palette.clr500}}}
                     secondary={text} 
-                    secondaryTypographyProps={{variant: "inAppHeadingM", sx: {color: theme.palette.clr100}}}
+                    secondaryTypographyProps={{
+                      variant: "inAppHeadingM", 
+                      sx: {color: theme.palette.clr100, "&:hover":{color: theme.palette.primary.main}}
+                    }}
                     sx={{m: 0}}
                   />
                   
