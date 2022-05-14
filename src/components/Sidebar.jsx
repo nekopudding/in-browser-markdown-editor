@@ -72,6 +72,7 @@ function Sidebar(props) {
                 sx={{
                   p: 0, 
                   height: 24,
+                  width: 48,
                   borderRadius: '12px',
                   "& .MuiSwitch-switchBase": {
                     p: 0
