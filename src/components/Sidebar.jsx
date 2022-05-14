@@ -3,12 +3,10 @@ import React from 'react';
 import theme from 'theme';
 import documentIcon from 'assets/icon-document.svg'
 import Button from './Button';
-import Toggle from './Toggle';
-import lightIcon from 'assets/icon-light-mode.svg'
-import darkIcon from 'assets/icon-dark-mode.svg'
+import ModeToggle from './ModeToggle';
 
 function Sidebar(props) {
-  const {drawerWidth, open, setOpen} = props;
+  const {drawerWidth, open, setOpen, darkMode, setDarkMode} = props;
   return (
     <>
       <Drawer
@@ -17,7 +15,6 @@ function Sidebar(props) {
           flexShrink: 0,
           '& .MuiDrawer-paper': {
             width: drawerWidth,
-            boxSizing: 'border-box',
             bgcolor: theme.palette.clr900
           },
         }}
@@ -30,6 +27,7 @@ function Sidebar(props) {
             display: 'flex',
             alignItems: 'center',
             pl: 3,
+            height: '82px',
             // necessary for content to be below app bar
             ...theme.mixins.toolbar,
           }}
@@ -66,28 +64,7 @@ function Sidebar(props) {
             ))}
           </List>
           <Box sx={{p: 3,}}>
-            <Box sx={{ width: 104 }}>
-              <img src={lightIcon} alt='light mode'/>
-              <Switch 
-                sx={{
-                  p: 0, 
-                  height: 24,
-                  width: 48,
-                  borderRadius: '12px',
-                  "& .MuiSwitch-switchBase": {
-                    p: 0
-                  },
-                  "& .Mui-checked": {
-                    transform: 'translateX(24px)'
-                  },
-                  "& .MuiSwitch-thumb": {
-                    width: '12px',
-                    height: '12px'
-                  }
-                }}
-              />
-              <img src={darkIcon} alt='dark mode'/>
-            </Box>
+              <ModeToggle darkMode={darkMode} setDarkMode={setDarkMode}/>
           </Box>
           
         </Stack>
