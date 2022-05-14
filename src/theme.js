@@ -36,7 +36,7 @@ const theme = createTheme({
       fontSize: '14px',
       letterSpacing: '2px'
     },
-    inAppBody: {
+    inAppBodyM: {
       fontFamily: 'Roboto',
       fontWeight: 300,
       fontSize: '13px'

@@ -7,25 +7,25 @@ function Toggle(props) {
   return (
     <Switch
       {...props}
-      size='small'
-      sx={{
-        width: '48px',
-        height: '24px',
-        bgcolor: theme.palette.clr600,
-        borderRadius: '24px',
-        '& .MuiSwitch-thumb': {
-          width: '12px',
-          height: '12px',
-        },
-        '& .MuiSwitch-input': {
-          width: '48px',
-          height: '24px',
-          position: 'absolute', 
-          top: '50%', 
-          transform: 'translateY(-50%)',
-        },
-        ...sx
-      }}
+      color='default'
+      // sx={{
+      //   width: '48px',
+      //   height: '24px',
+      //   bgcolor: theme.palette.clr600,
+      //   borderRadius: '24px',
+      //   '& .MuiSwitch-thumb': {
+      //     width: '12px',
+      //     height: '12px',
+      //   },
+      //   '& .MuiSwitch-input': {
+      //     width: '48px',
+      //     height: '24px',
+      //     position: 'absolute', 
+      //     top: '50%', 
+      //     transform: 'translateY(-50%)',
+      //   },
+      //   ...sx
+      // }}
     />
   )
 }
