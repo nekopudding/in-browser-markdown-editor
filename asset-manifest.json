@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/in-browser-markdown-editor/static/css/main.c0f9e29b.css",
+    "main.js": "/in-browser-markdown-editor/static/js/main.df88118c.js",
+    "static/js/787.5ce2d754.chunk.js": "/in-browser-markdown-editor/static/js/787.5ce2d754.chunk.js",
+    "static/media/logo.svg": "/in-browser-markdown-editor/static/media/logo.5b7308b68f81271a2069e2abec2f68bd.svg",
+    "index.html": "/in-browser-markdown-editor/index.html",
+    "static/media/icon-light-mode.svg": "/in-browser-markdown-editor/static/media/icon-light-mode.e85bf01629f3b2d8f7f64c0b610ea772.svg",
+    "static/media/icon-save.svg": "/in-browser-markdown-editor/static/media/icon-save.599720ade817c8f2f2f5eaf111579c8a.svg",
+    "static/media/icon-document.svg": "/in-browser-markdown-editor/static/media/icon-document.687a142ca3ba47d57e8d09b599f1f6b9.svg",
+    "static/media/icon-dark-mode.svg": "/in-browser-markdown-editor/static/media/icon-dark-mode.62526840c2a0758604b6b31d0567e12c.svg",
+    "static/media/icon-delete.svg": "/in-browser-markdown-editor/static/media/icon-delete.1af61fd7229999980bcf6d8219a5b97f.svg",
+    "static/media/icon-close.svg": "/in-browser-markdown-editor/static/media/icon-close.04c6c56b623f77a1697d4d2fd79674e6.svg",
+    "static/media/icon-menu.svg": "/in-browser-markdown-editor/static/media/icon-menu.44d4f02ceaf9da4fa461af7cf1ef603b.svg",
+    "main.c0f9e29b.css.map": "/in-browser-markdown-editor/static/css/main.c0f9e29b.css.map",
+    "main.df88118c.js.map": "/in-browser-markdown-editor/static/js/main.df88118c.js.map",
+    "787.5ce2d754.chunk.js.map": "/in-browser-markdown-editor/static/js/787.5ce2d754.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.c0f9e29b.css",
+    "static/js/main.df88118c.js"
+  ]
+}
