@@ -10,13 +10,13 @@ import theme from 'theme';
 import Button from './Button';
 
 function Header(props) {
-  const {drawerWidth, open, setOpen} = props;
+  const {drawerWidth, open, setOpen, headerHeight} = props;
   return (
    <>
      <AppBar position="fixed" sx={{pl: open ? drawerWidth + "px": 0, bgcolor: theme.palette.clr800}}>
         <Toolbar 
           sx={{
-            height: '72px', 
+            height: headerHeight, 
             p: 0 + " !important",
           }}
         >
@@ -26,8 +26,8 @@ function Header(props) {
             onClick={()=>setOpen(!open)}
             sx={{ 
               borderRadius: 0,
-              width: '72px',
-              height: '72px',
+              width: headerHeight,
+              height: headerHeight,
               bgcolor: theme.palette.clr700,
               "&:hover": {
                 bgcolor: theme.palette.primary.main

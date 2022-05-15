@@ -15,7 +15,7 @@ function Sidebar(props) {
           flexShrink: 0,
           '& .MuiDrawer-paper': {
             width: drawerWidth,
-            bgcolor: theme.palette.clr900
+            bgcolor: theme.palette.clr900,
           },
         }}
         variant="persistent"
