@@ -1,9 +1,23 @@
-import { Box, Typography } from '@mui/material'
-import React from 'react'
+import { Box, Typography, TextField } from '@mui/material'
+import React, { useState } from 'react'
 import theme from 'theme';
+import data from 'data.json'
+import { ReactMarkdown } from 'react-markdown/lib/react-markdown';
+import './Editor.css';
+
+const markdownStyle = {
+  '& h1': {
+    ...theme.typography.h1
+  }
+}
 
 function Editor(props) {
   const {headerHeight,open, drawerWidth} = props;
+  const [text,setText] = useState(data[1].content);
+
+  function handleChange(e) {
+    setText(e.target.value);
+  }
   return (
     <>
       <Box 
@@ -13,7 +27,6 @@ function Editor(props) {
           width: '100vw', 
           display:'flex',
           flexGrow: 1,
-          padding: theme.spacing(3),
           transition: theme.transitions.create('margin', {
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.leavingScreen,
@@ -28,17 +41,30 @@ function Editor(props) {
           }),
           }}
         >
-        <Typography paragraph>Consequat mauris nunc congue nisi vitae suscipit. Fringilla est ullamcorper
-          eget nulla facilisi etiam dignissim diam. Pulvinar elementum integer enim
-          neque volutpat ac tincidunt. Ornare suspendisse sed nisi lacus sed viverra
-          tellus. Purus sit amet volutpat consequat mauris. Elementum eu facilisis
-          sed odio morbi. Euismod lacinia at quis risus sed vulputate odio. Morbi
-          tincidunt ornare massa eget egestas purus viverra accumsan in. In hendrerit
-          gravida rutrum quisque non tellus orci ac. Pellentesque nec nam aliquam sem
-          et tortor. Habitant morbi tristique senectus et. Adipiscing elit duis
-          tristique sollicitudin nibh sit. Ornare aenean euismod elementum nisi quis
-          eleifend. Commodo viverra maecenas accumsan lacus vel facilisis. Nulla
-          posuere sollicitudin aliquam ultrices sagittis orci a.</Typography>
+        <Box sx={{width: '50vw'}}>
+          <TextField 
+            inputProps={{
+              sx: {...theme.typography.code}
+            }} 
+            sx={{height: '100%', width:'100%'}} 
+            multiline 
+            rows={36} 
+            value={text} 
+            onChange={handleChange}
+          />
+        </Box>
+        <Box 
+          sx={{
+            width: '50vw', 
+            height: "100%",
+            overflowY: 'scroll',
+            p: 3,
+            ...theme.typography,
+            '& p,li,a,span': {...theme.typography.body},
+            '& blockquote *': {...theme.typography.bodyBold},
+          }}>          
+          <ReactMarkdown>{text}</ReactMarkdown>
+        </Box>
       </Box>
     </>
   )

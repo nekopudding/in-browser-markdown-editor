@@ -1,4 +1,4 @@
-import { AppBar,Toolbar,IconButton,Typography, Box, Divider, ListItem, ListItemButton, ListItemIcon, ListItemText, Input } from '@mui/material'
+import { AppBar,Toolbar,IconButton,Typography, Box, Divider, ListItem, ListItemButton, ListItemIcon, ListItemText, Input, Stack } from '@mui/material'
 import React from 'react'
 import {ReactComponent as MenuIcon} from 'assets/icon-menu.svg';
 import {ReactComponent as CloseIcon} from 'assets/icon-close.svg';
@@ -68,30 +68,20 @@ function Header(props) {
             <ListItemIcon sx={{minWidth: 30}}>
               <DocumentIcon />
             </ListItemIcon>
-            <ListItemText 
-              primary={"Document Name"} 
-              primaryTypographyProps={{variant: "inAppBodyM", sx: {color: theme.palette.clr500}}}
-              secondary={
-                <Input 
-                  defaultValue='welcome.md' 
-                  inputProps={{ 
-                    'aria-label': 'description', 
-                    variant: "inAppHeadingM",
-                    sx: {
-                      color: theme.palette.clr100,
-                      ...theme.typography.inAppHeadingM,
-                    } 
-                  }}
-                />
-              } 
-              sx={{
-                m: 0, 
-                '& .MuiInput-underline:after': {
-                  borderBottomColor: theme.palette.clr100,
-                  borderWidth: '0 0 1px 0'
-                },
-              }}
-            />
+            <Stack>
+              <Typography variant='inAppBodyM' sx={{color: theme.palette.clr500}}>Document Name</Typography>
+              <Input 
+                defaultValue='welcome.md' 
+                inputProps={{ 
+                  'aria-label': 'description', 
+                  variant: "inAppHeadingM",
+                  sx: {
+                    color: theme.palette.clr100,
+                    ...theme.typography.inAppHeadingM,
+                  } 
+                }}
+              />
+            </Stack>
           </ListItem>
         </Toolbar>
       </AppBar>
