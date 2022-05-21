@@ -13,7 +13,10 @@ function Header(props) {
   const {drawerWidth, open, setOpen, headerHeight} = props;
   return (
    <>
-     <AppBar position="fixed" sx={{pl: open ? drawerWidth + "px": 0, bgcolor: theme.palette.clr800}}>
+     <AppBar 
+      position="fixed" 
+      sx={{pl: open ? drawerWidth + "px": 0, bgcolor: theme.palette.clr800, boxShadow: 'none'}}
+    >
         <Toolbar 
           sx={{
             height: headerHeight, 
@@ -72,12 +75,18 @@ function Header(props) {
               <Typography variant='inAppBodyM' sx={{color: theme.palette.clr500}}>Document Name</Typography>
               <Input 
                 defaultValue='welcome.md' 
+                sx={{
+                  '&::before': {borderBottom: 'none'},
+                  '&::after': {borderBottom: '1px solid '+ theme.palette.clr100}
+                }}
                 inputProps={{ 
                   'aria-label': 'description', 
                   variant: "inAppHeadingM",
                   sx: {
                     color: theme.palette.clr100,
                     ...theme.typography.inAppHeadingM,
+                    pt: 0,
+                    caretColor: theme.palette.primary.main
                   } 
                 }}
               />

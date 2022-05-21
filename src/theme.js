@@ -54,7 +54,7 @@ const theme = createTheme({
     },
     inAppHeadingS: {
       fontFamily: 'Roboto',
-      fontWeight: 400,
+      fontWeight: 500,
       fontSize: '14px',
       letterSpacing: '2px'
     },
@@ -67,37 +67,38 @@ const theme = createTheme({
       fontWeight: 700,
       fontSize: '32px',
       color: _.palette.clr700,
-      lineHeight: 2
+      my: 2.5
     },
     h2: {
       fontWeight: 300,
       fontSize: '28px',
       color: _.palette.clr700,
-      lineHeight: 2
+      my: 2.5
     },
     h3: {
       fontWeight: 700,
       fontSize: '24px',
       color: _.palette.clr700,
-      lineHeight: 2
+      my: 2.5
     },
     h4: {
       fontWeight: 700,
       fontSize: '20px',
       color: _.palette.clr700,
-      lineHeight: 2
+      my: 2.5
     },
     h5: {
       fontWeight: 700,
       fontSize: '16px',
       color: _.palette.clr700,
-      lineHeight: 2
+      my: 2.5
     },
     h6: {
       fontWeight: 700,
       fontSize: '14px',
       color: _.palette.primary.main,
-      lineHeight: 2
+      lineHeight: 1,
+      my: 2.5
     },
     body: {
       fontSize: '14px',

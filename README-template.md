@@ -79,6 +79,22 @@ Then crop/optimize/edit your image however you like, add it to your project, and
   borderWidth: '0 0 1px 0'
 },
 ```
+- customizing bullet points
+ https://www.w3schools.com/howto/howto_css_bullet_color.asp
+ ```js 
+'& ul': {listStyle: 'none'},
+'& ul li::before': {
+  content: '"\\2022"',  /* Add content: \2022 is the CSS Code/unicode for a bullet */
+  color: theme.palette.primary.main, /* Change the color */
+  fontWeight: 'bold', /* If you want it to be bold */
+  display: 'inline-block', /* Needed to add space between the bullet and the text */
+  width: '1em', /* Also needed for space (tweak if needed) */
+  ml: '-1em', /* Also needed for space (tweak if needed) */
+}
+ ```
+ - editor - need to use first-child as first-of-type will apply to the first of each type of children
+
+
 Use this section to recap over some of your major learnings while working through this project. Writing these out and providing code samples of areas you want to highlight is a great way to reinforce your own knowledge.
 
 To see how you can add code snippets, see below:
