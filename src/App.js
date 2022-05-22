@@ -35,24 +35,23 @@ function App() {
         name: data[1].name,
         content: data[1].content
       })
-
       localStorage.setItem('1', JSON.stringify({name: data[1].name, content: data[1].content}));
       localStorage.setItem('0', JSON.stringify({name:data[0].name, content:data[0].content}));
 
-      localStorage.setItem("files", JSON.stringify(
-        [
-          {
-            id: '1',
-            name: data[1].name,
-            dateCreated: today.getDate()
-          },
-          {
-            id: '0',
-            name: data[0].name,
-            dateCreated: today.getDate()
-          },
-        ]
-      ));
+      const newList = [
+        {
+          id: '1',
+          name: data[1].name,
+          dateCreated: today.getDate()
+        },
+        {
+          id: '0',
+          name: data[0].name,
+          dateCreated: today.getDate()
+        },
+      ]
+      localStorage.setItem("files", JSON.stringify(newList));
+      setFileList(newList);
   }
 
   function loadFile(id) {
