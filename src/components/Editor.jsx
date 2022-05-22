@@ -95,7 +95,7 @@ function Editor(props) {
             InputProps={{sx: {...(darkMode ? darkTheme : theme).typography.code, caretColor: (darkMode ? darkTheme : theme).typography.code.color}}} 
           />
         </Box>
-        <Divider orientation='vertical' sx={{borderColor: darkMode ? _.clr600 : _.clr300, zIndex: 200}}/>
+        <Divider orientation='vertical' sx={{borderColor: darkMode ? _.clr600 : _.clr300, zIndex: 200, display: preview ? 'none' : 'block'}}/>
         <Box sx={{ width: preview ? '100%' : '50vw', overflowY: 'scroll', position: 'abosolute'}}>
           <EditorHeader darkMode={darkMode} sx={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: preview ? '100%' : '50vw' }}>
             PREVIEW

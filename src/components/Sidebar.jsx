@@ -15,11 +15,13 @@ function Sidebar(props) {
           flexShrink: 0,
           '& .MuiDrawer-paper': {
             width: drawerWidth,
+            border: 'none'
           },
         }}
         variant="persistent"
         anchor="left"
         open={open}
+        hideBackdrop
       >
         <Box
           sx={{
