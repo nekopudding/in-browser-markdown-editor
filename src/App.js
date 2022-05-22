@@ -8,6 +8,7 @@ import Sidebar from 'components/Sidebar';
 import Editor from 'components/Editor';
 import data from 'data.json'
 import { v4 as uuid } from 'uuid';
+import formatDate from 'utils/formatDate';
 
 const drawerWidth = 240;
 const headerHeight = 72;
@@ -25,7 +26,6 @@ function App() {
   const commonProps = {
     darkMode: darkMode
   }
-  const today = new Date();
 
   //init some files for first time visiters
   function initFiles() {
@@ -42,12 +42,12 @@ function App() {
         {
           id: '1',
           name: data[1].name,
-          dateCreated: today.getDate()
+          dateCreated: formatDate(new Date()) 
         },
         {
           id: '0',
           name: data[0].name,
-          dateCreated: today.getDate()
+          dateCreated: formatDate(new Date())
         },
       ]
       localStorage.setItem("files", JSON.stringify(newList));
@@ -59,11 +59,12 @@ function App() {
       console.error("ERROR *** Attempting to load a file that does not exist")
       return;
     }
-    console.log('loading file: ' + JSON.parse(localStorage.getItem(id)).name + " | id: " + id);
+    const file = JSON.parse(localStorage.getItem(id));
+    console.log('loading file: ' + file.name + " | id: " + id);
     setCurrFile({
       id: id,
-      name: JSON.parse(localStorage.getItem(id)).name,
-      content:JSON.parse(localStorage.getItem(id)).content
+      name: file.name,
+      content:file.content
     })
   }
 
@@ -99,7 +100,7 @@ function App() {
     const newFile = {
       id: uuid(),
       name: data[0].name,
-      dateCreated: today.getDate()
+      dateCreated: formatDate(new Date())
     }
     const updatedList = [...fileList, newFile]
     setFileList(updatedList)
