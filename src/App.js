@@ -1,20 +1,20 @@
 import React, {useState, useEffect} from 'react'
-import {Box, CssBaseline, ThemeProvider, Typography} from '@mui/material'
+import {Box, CssBaseline, ThemeProvider} from '@mui/material'
 import theme from 'theme';
-import Button from 'components/Button';
-import ModeToggle from 'components/ModeToggle';
 import Header from 'components/Header';
 import Sidebar from 'components/Sidebar';
 import Editor from 'components/Editor';
 import data from 'data.json'
 import { v4 as uuid } from 'uuid';
 import formatDate from 'utils/formatDate';
+import DeleteDialog from 'components/DeleteDialog';
 
 const drawerWidth = 240;
 const headerHeight = 72;
 
 function App() {
-  const [open, setOpen] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [dialogOpen, setDialogOpen] = useState(false)
   const [darkMode, setDarkMode] = useState(true);
 
   //list of files in localStorage
@@ -129,6 +129,10 @@ function App() {
     }
     return filename;
   }
+  function handleConfirmDelete() {
+    deleteFile();
+    setDialogOpen(false)
+  };
 
   return (
    <>
@@ -136,18 +140,19 @@ function App() {
       <CssBaseline/>
       <Box sx={{ display: 'flex' }}>
         <Header 
-          open={open} 
-          setOpen={setOpen} 
+          open={sidebarOpen} 
+          setOpen={setSidebarOpen} 
           drawerWidth={drawerWidth} 
           headerHeight={headerHeight}
           currFile={currFile}
           setCurrFile={setCurrFile}
           saveFile={saveFile}
           deleteFile={deleteFile}
+          setDialogOpen={setDialogOpen}
         /> 
         <Sidebar 
-          open={open} 
-          setOpen={setOpen} 
+          open={sidebarOpen} 
+          setOpen={setSidebarOpen} 
           drawerWidth={drawerWidth} 
           darkMode={darkMode} 
           setDarkMode={setDarkMode}
@@ -158,10 +163,16 @@ function App() {
         />
         <Editor 
           headerHeight={headerHeight} 
-          open={open} 
+          open={sidebarOpen} 
           drawerWidth={drawerWidth}
           currFile={currFile}
           setCurrFile={setCurrFile}
+        />
+        <DeleteDialog
+          dialogOpen={dialogOpen}
+          setDialogOpen={setDialogOpen}
+          handleConfirmDelete={handleConfirmDelete}
+          currFile={currFile}
         />
       </Box>
     </ThemeProvider>

@@ -1,4 +1,4 @@
-import { Drawer,Divider, Box, Typography, ListItem,List,ListItemIcon,ListItemButton, ListItemText, Stack,Switch, FormGroup, FormControlLabel } from '@mui/material'
+import { Drawer,Box, Typography, ListItem,List,ListItemIcon,ListItemButton, ListItemText, Stack } from '@mui/material'
 import React from 'react';
 import theme from 'theme';
 import {ReactComponent as DocumentIcon} from 'assets/icon-document.svg'

@@ -10,7 +10,12 @@ import theme from 'theme';
 import Button from './Button';
 
 function Header(props) {
-  const {drawerWidth, open, setOpen, headerHeight, currFile, setCurrFile, saveFile, deleteFile} = props;
+  const {drawerWidth, open, setOpen, headerHeight, currFile, setCurrFile, saveFile, setDialogOpen} = props;
+  
+  function handleOpenDialog() {
+    if (currFile.id === '-1') return;
+    setDialogOpen(true)
+  }
   return (
    <>
      <AppBar 
@@ -57,7 +62,7 @@ function Header(props) {
                   "& *": { fill: theme.palette.clr500 },
                   "&:hover *": { fill: theme.palette.primary.main }
                 }}
-                onClick={()=>deleteFile()}  
+                onClick={handleOpenDialog}  
               >
                 <DeleteIcon/>
               </IconButton>
