@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/in-browser-markdown-editor/static/css/main.c0f9e29b.css",
-    "main.js": "/in-browser-markdown-editor/static/js/main.a305525a.js",
+    "main.js": "/in-browser-markdown-editor/static/js/main.6b3bd461.js",
     "static/js/787.5ce2d754.chunk.js": "/in-browser-markdown-editor/static/js/787.5ce2d754.chunk.js",
     "static/media/logo.svg": "/in-browser-markdown-editor/static/media/logo.5b7308b68f81271a2069e2abec2f68bd.svg",
     "index.html": "/in-browser-markdown-editor/index.html",
@@ -15,11 +15,11 @@
     "static/media/icon-close.svg": "/in-browser-markdown-editor/static/media/icon-close.04c6c56b623f77a1697d4d2fd79674e6.svg",
     "static/media/icon-menu.svg": "/in-browser-markdown-editor/static/media/icon-menu.44d4f02ceaf9da4fa461af7cf1ef603b.svg",
     "main.c0f9e29b.css.map": "/in-browser-markdown-editor/static/css/main.c0f9e29b.css.map",
-    "main.a305525a.js.map": "/in-browser-markdown-editor/static/js/main.a305525a.js.map",
+    "main.6b3bd461.js.map": "/in-browser-markdown-editor/static/js/main.6b3bd461.js.map",
     "787.5ce2d754.chunk.js.map": "/in-browser-markdown-editor/static/js/787.5ce2d754.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.c0f9e29b.css",
-    "static/js/main.a305525a.js"
+    "static/js/main.6b3bd461.js"
   ]
 }
