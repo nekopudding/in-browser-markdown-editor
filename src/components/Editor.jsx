@@ -39,6 +39,7 @@ const markdownStyle = {
 function Editor(props) {
   const {headerHeight,open, drawerWidth, currFile, setCurrFile} = props;
   const [preview,setPreview] = useState(false);
+  const [content,setContent] = useState("");
 
   const editorStyle = {
     mt: headerHeight + "px", 
@@ -68,10 +69,8 @@ function Editor(props) {
   }
 
   useEffect(()=>{
-    setCurrFile((prev) => {
-      return ({...prev, content: " " + prev.content})
-    })
-  },[currFile,setCurrFile]);
+    setContent(currFile.content)
+  },[currFile]);
 
   return (
     <>
@@ -87,7 +86,7 @@ function Editor(props) {
               '.MuiInputBase-root textarea': { p: 2 }
             }}
             multiline 
-            value={currFile.content} 
+            value={content} 
             onInput={(e)=>handleChange(e)}
             type="textarea"
             InputProps={{sx: {...theme.typography.code}}} 
