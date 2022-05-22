@@ -79,7 +79,7 @@ Then crop/optimize/edit your image however you like, add it to your project, and
   borderWidth: '0 0 1px 0'
 },
 ```
-- customizing bullet points
+- customizing bullet points - use position absolute to separate it from li flow
  https://www.w3schools.com/howto/howto_css_bullet_color.asp
  ```js 
 '& ul': {listStyle: 'none'},
@@ -103,6 +103,9 @@ useEffect(()=>{
   },[currFile]);
 ```
 - filtering out props in composition using for loop
+
+- configured how fileList in sidebar should overflow by nesting all elements under stack, using overflow auto
+- realized that the direct child of the sidebar header cannot set height - set height in typography to match height of header
 
 Use this section to recap over some of your major learnings while working through this project. Writing these out and providing code samples of areas you want to highlight is a great way to reinforce your own knowledge.
 

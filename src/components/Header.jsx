@@ -83,7 +83,7 @@ function Header(props) {
             <ListItemIcon sx={{minWidth: 30}}>
               <DocumentIcon />
             </ListItemIcon>
-            <Stack>
+            <Stack sx={{width: 400}}>
               <Typography variant='inAppBodyM' sx={{color: _.clr500}}>Document Name</Typography>
               <Input 
                 sx={{

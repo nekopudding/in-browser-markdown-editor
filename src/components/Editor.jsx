@@ -11,9 +11,8 @@ const editorHeaderOffset = 48;
 
 
 function Editor(props) {
-  const {headerHeight,open, drawerWidth, currFile, setCurrFile, darkMode, sidebarTransition} = props;
+  const {headerHeight,open, drawerWidth, currFile, darkMode, sidebarTransition,content,setContent} = props;
   const [preview,setPreview] = useState(false);
-  const [content,setContent] = useState("");
 
   const markdownStyle = {
     width: '50vw',
@@ -36,8 +35,10 @@ function Editor(props) {
     '& ul': {listStyle: 'none'},
     '& ul li::before': {
       content: '"\\2022"',  //unicode for a bullet
+      fontFamily: 'Roboto Slab',
+      position: 'absolute',
       color: _.primary.main, 
-      fontWeight: 'bold', 
+      fontWeight: 900, 
       display: 'inline-block', 
       width: '1em', 
       ml: '-1em', 
@@ -56,9 +57,6 @@ function Editor(props) {
 
   function handleChange(e) {
     setContent(e.target.value);
-    setCurrFile((prev) => {
-      return ({...prev, content: e.target.value})
-    })
   }
 
   useEffect(()=>{
@@ -115,7 +113,7 @@ function Editor(props) {
           <Box sx={{height: editorHeaderOffset}}/>
           <Box sx={{display: 'flex', justifyContent:'center'}}>
             <Box sx={markdownStyle}>  
-              <ReactMarkdown>{currFile.content}</ReactMarkdown>
+              <ReactMarkdown>{content}</ReactMarkdown>
             </Box>
           </Box>
         </Box>

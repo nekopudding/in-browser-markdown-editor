@@ -9,7 +9,7 @@ import { v4 as uuid } from 'uuid';
 import formatDate from 'utils/formatDate';
 import DeleteDialog from 'components/DeleteDialog';
 
-const drawerWidth = 240;
+const drawerWidth = 250;
 const headerHeight = 72;
 
 function App() {
@@ -22,6 +22,7 @@ function App() {
 
   //current file info
   const [currFile,setCurrFile] = useState({id: '1',name: data[1].name, content: data[1].content})
+  const [content,setContent] = useState(""); //middleman for holding content to prevent over-rendering
 
   //init some files for first time visiters
   function initFiles() {
@@ -75,8 +76,9 @@ function App() {
 
   function saveFile() {
     const resolvedFile = {
-      ...currFile,
-      name: resolveFilename(currFile.name, currFile.id)
+      id: currFile.id,
+      name: resolveFilename(currFile.name, currFile.id),
+      content: content
     }
     localStorage.setItem(resolvedFile.id, JSON.stringify({name: resolvedFile.name, content: resolvedFile.content}));
     const updatedList = fileList.map((file, i) => {
@@ -171,6 +173,7 @@ function App() {
           loadFile={loadFile}
           createNewFile={createNewFile}
           currFile={currFile}
+          headerHeight={headerHeight}
         />
         <Editor 
           headerHeight={headerHeight} 
@@ -180,6 +183,8 @@ function App() {
           setCurrFile={setCurrFile}
           darkMode={darkMode}
           sidebarTransition={sidebarTransition}
+          content={content}
+          setContent={setContent}
         />
         <DeleteDialog
           dialogOpen={dialogOpen}
