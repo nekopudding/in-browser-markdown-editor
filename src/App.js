@@ -30,26 +30,22 @@ function App() {
   //init some files for first time visiters
   function initFiles() {
       console.log("initializing sample files...");
-      setCurrFile({
-        id: '1',
-        name: data[1].name,
-        content: data[1].content
-      })
-      localStorage.setItem('1', JSON.stringify({name: data[1].name, content: data[1].content}));
-      localStorage.setItem('0', JSON.stringify({name:data[0].name, content:data[0].content}));
-
       const newList = [
         {
           id: '1',
-          name: data[1].name,
+          name: resolveFilename(data[1].name, '1'),
           dateCreated: formatDate(new Date()) 
         },
         {
           id: '0',
-          name: data[0].name,
+          name: resolveFilename(data[0].name, '0'),
           dateCreated: formatDate(new Date())
         },
       ]
+      setCurrFile(newList[0])
+      localStorage.setItem(newList[0].id, JSON.stringify({name: newList[0].name, content: data[1].content}));
+      localStorage.setItem(newList[1].id, JSON.stringify({name: newList[1].name, content:data[0].content}));
+
       localStorage.setItem("files", JSON.stringify(newList));
       setFileList(newList);
   }
@@ -82,24 +78,30 @@ function App() {
   },[])
 
   function saveFile() {
-    localStorage.setItem(currFile.id, JSON.stringify({name: currFile.name, content: currFile.content}));
+    const resolvedFile = {
+      ...currFile,
+      name: resolveFilename(currFile.name, currFile.id)
+    }
+    localStorage.setItem(resolvedFile.id, JSON.stringify({name: resolvedFile.name, content: resolvedFile.content}));
     const updatedList = fileList.map((file, i) => {
-        if (file.id === currFile.id && file.name != currFile.name) {
-          return {...file, name: currFile.name}
+        if (file.id === resolvedFile.id && file.name !== resolvedFile.name) {
+          return {...file, name: resolvedFile.name}
         } else {return file;}
       })
 
     setFileList(updatedList);
+    setCurrFile(resolvedFile);
     localStorage.setItem("files", JSON.stringify(updatedList));
     
-    console.log('saving file: ' + currFile.name + " | id: " + currFile.id);
+    console.log('saving file: ' + resolvedFile.name + " | id: " + resolvedFile.id);
   }
 
   function createNewFile() {
     //generate uuid
+    const fileId = uuid();
     const newFile = {
-      id: uuid(),
-      name: data[0].name,
+      id: fileId,
+      name: resolveFilename(data[0].name, fileId),
       dateCreated: formatDate(new Date())
     }
     const updatedList = [...fileList, newFile]
@@ -118,6 +120,14 @@ function App() {
       name: '',
       content: ''
     })
+  }
+  function resolveFilename(filename,id,n = 0) {
+    if (fileList.filter(file => file.id !== id && file.name === filename).length !== 0) { //if there is a different file with same name
+        const name = filename.split(".md")[0].split("(")[0] //remove .md and (n) suffix
+        console.log(name);
+        return resolveFilename(`${name}(${n+1}).md`, id, n+1);
+    }
+    return filename;
   }
 
   return (
