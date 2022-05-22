@@ -7,6 +7,7 @@ import Header from 'components/Header';
 import Sidebar from 'components/Sidebar';
 import Editor from 'components/Editor';
 import data from 'data.json'
+import { v4 as uuid } from 'uuid';
 
 const drawerWidth = 240;
 const headerHeight = 72;
@@ -24,6 +25,7 @@ function App() {
   const commonProps = {
     darkMode: darkMode
   }
+  const today = new Date();
 
   //init some files for first time visiters
   function initFiles() {
@@ -37,7 +39,6 @@ function App() {
       localStorage.setItem('1', JSON.stringify({name: data[1].name, content: data[1].content}));
       localStorage.setItem('0', JSON.stringify({name:data[0].name, content:data[0].content}));
 
-      const today = new Date();
       localStorage.setItem("files", JSON.stringify(
         [
           {
@@ -59,7 +60,7 @@ function App() {
       console.error("ERROR *** Attempting to load a file that does not exist")
       return;
     }
-    console.log('loading file: ' + JSON.parse(localStorage.getItem(id)).name);
+    console.log('loading file: ' + JSON.parse(localStorage.getItem(id)).name + " | id: " + id);
     setCurrFile({
       id: id,
       name: JSON.parse(localStorage.getItem(id)).name,
@@ -94,6 +95,20 @@ function App() {
     console.log('saving file: ' + currFile.name + " | id: " + currFile.id);
   }
 
+  function createNewFile() {
+    //generate uuid
+    const newFile = {
+      id: uuid(),
+      name: data[0].name,
+      dateCreated: today.getDate()
+    }
+    const updatedList = [...fileList, newFile]
+    setFileList(updatedList)
+    localStorage.setItem("files", JSON.stringify(updatedList));
+    localStorage.setItem(newFile.id,JSON.stringify({name: newFile.name, content: ""}))
+    loadFile(newFile.id)
+  }
+
   return (
    <>
     <ThemeProvider theme={theme}>
@@ -116,6 +131,7 @@ function App() {
           setDarkMode={setDarkMode}
           fileList={fileList}
           loadFile={loadFile}
+          createNewFile={createNewFile}
         />
         <Editor 
           headerHeight={headerHeight} 

@@ -6,7 +6,7 @@ import Button from './Button';
 import ModeToggle from './ModeToggle';
 
 function Sidebar(props) {
-  const {drawerWidth, open, setOpen, darkMode, setDarkMode, fileList, loadFile} = props;
+  const {drawerWidth, open, setOpen, darkMode, setDarkMode, fileList, loadFile, createNewFile} = props;
   return (
     <>
       <Drawer
@@ -35,7 +35,7 @@ function Sidebar(props) {
           <Typography variant='inAppHeadingS' sx={{color: theme.palette.clr500}}>MY DOCUMENTS</Typography>
         </Box>
         <Box sx={{display: 'flex', justifyContent: 'center', pb: 1.5}}>
-          <Button sx={{width: 202}}><Typography variant="inAppHeadingM">+ New Document</Typography></Button>
+          <Button sx={{width: 202}} onClick={()=>createNewFile()}><Typography variant="inAppHeadingM">+ New Document</Typography></Button>
         </Box>
         <Stack sx={{height: '100%'}}>
           <List 
@@ -47,7 +47,7 @@ function Sidebar(props) {
           >
             {fileList.map(({id,name,dateCreated}, index) => (
               <ListItem key={id} disablePadding sx={{pl: 3}}>
-                <ListItemButton sx={{p: 0, py: 1.5}} onClick={()=>loadFile(id)}>
+                <ListItemButton sx={{p: 0, py: 1.5, '&:hover .MuiListItemText-secondary': {color: theme.palette.primary.main}}} onClick={()=>loadFile(id)}>
                   <ListItemIcon sx={{minWidth: 30}}>
                     <DocumentIcon />
                   </ListItemIcon>
@@ -57,7 +57,7 @@ function Sidebar(props) {
                     secondary={name} 
                     secondaryTypographyProps={{
                       variant: "inAppHeadingM", 
-                      sx: {color: theme.palette.clr100, "&:hover":{color: theme.palette.primary.main}}
+                      sx: {color: theme.palette.clr100}
                     }}
                     sx={{m: 0}}
                   />
