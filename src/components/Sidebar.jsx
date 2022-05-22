@@ -6,7 +6,7 @@ import Button from './Button';
 import ModeToggle from './ModeToggle';
 
 function Sidebar(props) {
-  const {drawerWidth, open, setOpen, darkMode, setDarkMode, fileList, loadFile, createNewFile} = props;
+  const {drawerWidth, open, darkMode, setDarkMode, fileList, loadFile, createNewFile, currFile} = props;
   return (
     <>
       <Drawer
@@ -46,8 +46,18 @@ function Sidebar(props) {
             }}
           >
             {fileList.map(({id,name,dateCreated}, index) => (
-              <ListItem key={id} disablePadding sx={{pl: 3}}>
-                <ListItemButton sx={{p: 0, py: 1.5, '&:hover .MuiListItemText-secondary': {color: theme.palette.primary.main}}} onClick={()=>loadFile(id)}>
+              <ListItem key={id} disablePadding>
+                <ListItemButton 
+                  sx={{
+                    p: 0, py: 1.5, pl: 3, 
+                    '&:hover .MuiListItemText-secondary': {color: theme.palette.primary.main},
+                    '&.Mui-selected:hover, &.Mui-selected': {
+                      bgcolor: theme.palette.clr1000,
+                    },
+                  }} 
+                  onClick={()=>loadFile(id)}
+                  selected={currFile.id === id}
+                >
                   <ListItemIcon sx={{minWidth: 30}}>
                     <DocumentIcon />
                   </ListItemIcon>

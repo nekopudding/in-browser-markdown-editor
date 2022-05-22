@@ -154,6 +154,7 @@ function App() {
           fileList={fileList}
           loadFile={loadFile}
           createNewFile={createNewFile}
+          currFile={currFile}
         />
         <Editor 
           headerHeight={headerHeight} 
