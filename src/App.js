@@ -42,13 +42,13 @@ function App() {
       localStorage.setItem("files", JSON.stringify(
         [
           {
-            id: '0',
-            name: data[0].name,
+            id: '1',
+            name: data[1].name,
             dateCreated: today.getDate()
           },
           {
-            id: '1',
-            name: data[1].name,
+            id: '0',
+            name: data[0].name,
             dateCreated: today.getDate()
           },
         ]
@@ -73,15 +73,15 @@ function App() {
     procedure - get files - for each file in list, put into sidebar with the info - date, title
     loading files - fetch file text from filename
     */
-    const files = localStorage.getItem("files");
-    if (files === null) { initFiles(); return; }
+    const files = JSON.parse(localStorage.getItem("files"));
+    if (files === null || files.length === 0) { initFiles(); return; }
 
-    setFileList(JSON.parse(files));
-    loadFile('1');
+    setFileList(files);
+    loadFile(files[0].id);
 
   },[])
 
-  function handleSave() {
+  function saveFile() {
     localStorage.setItem(currFile.id, JSON.stringify({name: currFile.name, content: currFile.content}));
     const updatedList = fileList.map((file, i) => {
         if (file.id === currFile.id && file.name != currFile.name) {
@@ -108,6 +108,17 @@ function App() {
     localStorage.setItem(newFile.id,JSON.stringify({name: newFile.name, content: ""}))
     loadFile(newFile.id)
   }
+  function deleteFile() {
+    const updatedList = fileList.filter((file,i)=> file.id !== currFile.id)
+    localStorage.removeItem(currFile.id);
+    localStorage.setItem("files",JSON.stringify(updatedList));
+    setFileList(updatedList);
+    setCurrFile({
+      id: '-1',
+      name: '',
+      content: ''
+    })
+  }
 
   return (
    <>
@@ -121,7 +132,8 @@ function App() {
           headerHeight={headerHeight}
           currFile={currFile}
           setCurrFile={setCurrFile}
-          handleSave={handleSave}
+          saveFile={saveFile}
+          deleteFile={deleteFile}
         /> 
         <Sidebar 
           open={open} 

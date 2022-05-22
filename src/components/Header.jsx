@@ -10,7 +10,7 @@ import theme from 'theme';
 import Button from './Button';
 
 function Header(props) {
-  const {drawerWidth, open, setOpen, headerHeight, currFile, setCurrFile, handleSave} = props;
+  const {drawerWidth, open, setOpen, headerHeight, currFile, setCurrFile, saveFile, deleteFile} = props;
   return (
    <>
      <AppBar 
@@ -56,10 +56,12 @@ function Header(props) {
                   borderRadius: '22px',
                   "& *": { fill: theme.palette.clr500 },
                   "&:hover *": { fill: theme.palette.primary.main }
-                }}>
+                }}
+                onClick={()=>deleteFile()}  
+              >
                 <DeleteIcon/>
               </IconButton>
-              <Button sx={{height: '40px'}} onClick={handleSave}>
+              <Button sx={{height: '40px'}} onClick={saveFile}>
                 <Box sx={{display: 'flex',alignItems: 'center', '& > * + *': {ml: 1}}} >
                   <SaveIcon/> 
                   <span>Save Changes</span>
