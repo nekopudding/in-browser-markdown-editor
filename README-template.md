@@ -93,7 +93,8 @@ Then crop/optimize/edit your image however you like, add it to your project, and
 }
  ```
  - editor - need to use first-child as first-of-type will apply to the first of each type of children
-
+- specifying number of rows in textarea will cause margin and overflow scroll issues
+- remember that position absolute is relative to the first non-static parent - use relative or absolute on the parent - if you want it to be fixed, use absolute on the parent
 
 Use this section to recap over some of your major learnings while working through this project. Writing these out and providing code samples of areas you want to highlight is a great way to reinforce your own knowledge.
 

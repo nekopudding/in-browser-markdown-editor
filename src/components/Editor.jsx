@@ -1,24 +1,27 @@
-import { Box, Typography, TextField, Divider } from '@mui/material'
+import { Box, Typography, TextField, Divider, IconButton } from '@mui/material'
 import React, { useState } from 'react'
 import theme from 'theme';
 import data from 'data.json'
 import { ReactMarkdown } from 'react-markdown/lib/react-markdown';
 import EditorHeader from './EditorHeader';
+import {ReactComponent as ShowPreviewIcon} from 'assets/icon-show-preview.svg';
+import {ReactComponent as HidePreviewIcon} from 'assets/icon-hide-preview.svg';
 
 
 const headerOffset = 48;
 const markdownStyle = {
+  width: '50vw',
   p: 3,
   ...theme.typography,
   '& p,li,a,span': {...theme.typography.body},
   '& blockquote, pre': {
     bgcolor: theme.palette.clr200, 
     p: 3, 
-    ml: 0
+    mx: 0,
+    borderRadius: '4px',
   },
   '& blockquote': { 
     borderLeft: '4px ' + theme.palette.primary.main + ' solid',
-    borderRadius: '4px'
   },
   '& blockquote *': {...theme.typography.bodyBold},
   '& ul': {listStyle: 'none'},
@@ -37,6 +40,7 @@ const markdownStyle = {
 function Editor(props) {
   const {headerHeight,open, drawerWidth} = props;
   const [text,setText] = useState(data[1].content);
+  const [preview,setPreview] = useState(false);
 
   const editorStyle = {
     mt: headerHeight + "px", 
@@ -48,7 +52,7 @@ function Editor(props) {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
-    marginLeft: `-${drawerWidth}px`,
+    ml: `-${drawerWidth}px`,
     ...(open && {
       transition: theme.transitions.create('margin', {
         easing: theme.transitions.easing.easeOut,
@@ -64,8 +68,8 @@ function Editor(props) {
   return (
     <>
       <Box sx={editorStyle}>
-        <Box sx={{width: '50vw', overflowY: 'scroll'}}>
-          <EditorHeader headerHeight={headerOffset}>MARKDOWN</EditorHeader>
+        <Box sx={{width: '50vw', overflowY: 'scroll', display: preview ? 'none' : 'block'}}>
+          <EditorHeader headerHeight={headerOffset} sx={{width: '50vw'}}>MARKDOWN</EditorHeader>
           <Box sx={{height: headerOffset}}/>
           <TextField 
             sx={{
@@ -73,9 +77,7 @@ function Editor(props) {
               width:'100%',
               '& fieldset': { borderWidth: '0 !important'},
               '.MuiInputBase-root': {p: 0},
-              '.MuiInputBase-root textarea': {
-                p: 2,
-              }
+              '.MuiInputBase-root textarea': { p: 2 }
             }}
             multiline 
             value={text} 
@@ -86,13 +88,32 @@ function Editor(props) {
           />
         </Box>
         <Divider orientation='vertical' sx={{borderColor: theme.palette.clr300, zIndex: 200}}/>
-        <Box sx={{ width: '50vw', overflowY: 'scroll'}}>
-          <EditorHeader headerHeight={headerOffset}>PREVIEW</EditorHeader>
+        <Box sx={{ width: preview ? '100%' : '50vw', overflowY: 'scroll', position: 'abosolute'}}>
+          <EditorHeader headerHeight={headerOffset} sx={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: preview ? '100%' : '50vw' }}>
+            PREVIEW
+            <IconButton
+              sx={{
+                borderRadius: '16px', 
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                width: 32, height: 32,
+                "& *": { fill: theme.palette.clr500 },
+                "&:hover *": { fill: theme.palette.primary.main},
+                "&:hover": {bgcolor: 'transparent'}
+              }}
+              onClick={()=>setPreview(!preview)}
+            >
+              {preview ? <HidePreviewIcon/> : <ShowPreviewIcon/>}
+            </IconButton>
+          </EditorHeader>
           <Box sx={{height: headerOffset}}/>
-          <Box sx={markdownStyle}>  
-            <ReactMarkdown>{text}</ReactMarkdown>
-            <Box sx={{height: '24px'}} /> {/* adds a bottom padding to bottom of overflow */}
+          <Box sx={{display: 'flex', justifyContent:'center'}}>
+            <Box sx={markdownStyle}>  
+              <ReactMarkdown>{text}</ReactMarkdown>
+            </Box>
           </Box>
+
         </Box>
         
       </Box>
