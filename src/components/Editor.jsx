@@ -62,14 +62,14 @@ function Editor(props) {
   }
 
   function handleChange(e) {
+    setContent(e.target.value);
     setCurrFile((prev) => {
-      console.log({...prev, content: e.target.value});
       return ({...prev, content: e.target.value})
     })
   }
 
   useEffect(()=>{
-    setContent(currFile.content)
+    setContent(currFile.content);
   },[currFile]);
 
   return (
@@ -88,9 +88,7 @@ function Editor(props) {
             multiline 
             value={content} 
             onInput={(e)=>handleChange(e)}
-            type="textarea"
             InputProps={{sx: {...theme.typography.code}}} 
-            
           />
         </Box>
         <Divider orientation='vertical' sx={{borderColor: theme.palette.clr300, zIndex: 200}}/>
@@ -119,9 +117,7 @@ function Editor(props) {
               <ReactMarkdown>{currFile.content}</ReactMarkdown>
             </Box>
           </Box>
-
         </Box>
-        
       </Box>
     </>
   )

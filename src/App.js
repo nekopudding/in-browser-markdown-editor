@@ -82,8 +82,16 @@ function App() {
 
   function handleSave() {
     localStorage.setItem(currFile.id, JSON.stringify({name: currFile.name, content: currFile.content}));
-    //if filename was changed, delete old file, save new
-    console.log('saving file: ' + currFile.name);
+    const updatedList = fileList.map((file, i) => {
+        if (file.id === currFile.id && file.name != currFile.name) {
+          return {...file, name: currFile.name}
+        } else {return file;}
+      })
+
+    setFileList(updatedList);
+    localStorage.setItem("files", JSON.stringify(updatedList));
+    
+    console.log('saving file: ' + currFile.name + " | id: " + currFile.id);
   }
 
   return (
@@ -97,6 +105,7 @@ function App() {
           drawerWidth={drawerWidth} 
           headerHeight={headerHeight}
           currFile={currFile}
+          setCurrFile={setCurrFile}
           handleSave={handleSave}
         /> 
         <Sidebar 

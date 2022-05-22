@@ -10,7 +10,7 @@ import theme from 'theme';
 import Button from './Button';
 
 function Header(props) {
-  const {drawerWidth, open, setOpen, headerHeight, currFile, setCurrFile, handleSave, currFileContent, setCurrFileContent} = props;
+  const {drawerWidth, open, setOpen, headerHeight, currFile, setCurrFile, handleSave} = props;
   return (
    <>
      <AppBar 
@@ -88,8 +88,10 @@ function Header(props) {
                     caretColor: theme.palette.primary.main
                   } 
                 }}
-                onChange={(e)=>setCurrFileContent(e.target.value)}
-                value={currFileContent}
+                onChange={(e)=>setCurrFile((prev) => {
+                  return ({...prev, name: e.target.value})
+                })}
+                value={currFile.name}
               />
             </Stack>
           </ListItem>
