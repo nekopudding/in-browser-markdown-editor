@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import {Box, CssBaseline, ThemeProvider} from '@mui/material'
-import lightTheme, { darkTheme } from 'theme';
+import theme, { darkTheme } from 'theme';
 import Header from 'components/Header';
 import Sidebar from 'components/Sidebar';
 import Editor from 'components/Editor';
@@ -129,9 +129,24 @@ function App() {
     setDialogOpen(false)
   };
 
+  const sidebarTransition = (attr) => {
+    return {
+      transition: theme.transitions.create(attr, {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.leavingScreen,
+      }),
+      ...(sidebarOpen && {
+        transition: theme.transitions.create(attr, {
+          easing: theme.transitions.easing.easeOut,
+          duration: theme.transitions.duration.enteringScreen,
+        }),
+      })
+    }
+  }
+
   return (
    <>
-    <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
+    <ThemeProvider theme={darkMode ? darkTheme : theme}>
       <CssBaseline/>
       <Box sx={{ display: 'flex' }}>
         <Header 
@@ -144,6 +159,7 @@ function App() {
           saveFile={saveFile}
           deleteFile={deleteFile}
           setDialogOpen={setDialogOpen}
+          sidebarTransition={sidebarTransition}
         /> 
         <Sidebar 
           open={sidebarOpen} 
@@ -163,6 +179,7 @@ function App() {
           currFile={currFile}
           setCurrFile={setCurrFile}
           darkMode={darkMode}
+          sidebarTransition={sidebarTransition}
         />
         <DeleteDialog
           dialogOpen={dialogOpen}

@@ -11,7 +11,7 @@ const editorHeaderOffset = 48;
 
 
 function Editor(props) {
-  const {headerHeight,open, drawerWidth, currFile, setCurrFile, darkMode} = props;
+  const {headerHeight,open, drawerWidth, currFile, setCurrFile, darkMode, sidebarTransition} = props;
   const [preview,setPreview] = useState(false);
   const [content,setContent] = useState("");
 
@@ -44,25 +44,14 @@ function Editor(props) {
     },
     '& > *:first-child': {mt: 0, pt: 0}, //remove top spacing of first element
   }
-
   const editorStyle = {
+    width: '100vw', 
     mt: headerHeight + "px", 
     height: window.innerHeight - headerHeight, 
-    width: '100vw', 
     display:'flex',
     flexGrow: 1,
-    transition: theme.transitions.create('margin', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-    ml: `-${drawerWidth}px`,
-    ...(open && {
-      transition: theme.transitions.create('margin', {
-        easing: theme.transitions.easing.easeOut,
-        duration: theme.transitions.duration.enteringScreen,
-      }),
-      marginLeft: 0,
-    }),
+    ml: open ? 0 : `-${drawerWidth}px`,
+    ...sidebarTransition('margin')
   }
 
   function handleChange(e) {
@@ -97,14 +86,22 @@ function Editor(props) {
         </Box>
         <Divider orientation='vertical' sx={{borderColor: darkMode ? _.clr600 : _.clr300, zIndex: 200, display: preview ? 'none' : 'block'}}/>
         <Box sx={{ width: preview ? '100%' : '50vw', overflowY: 'scroll', position: 'abosolute'}}>
-          <EditorHeader darkMode={darkMode} sx={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: preview ? '100%' : '50vw' }}>
+          <EditorHeader 
+            darkMode={darkMode} 
+            sx={{
+              display: 'flex', 
+              justifyContent: 'space-between', 
+              alignItems: 'center', 
+              width: preview ? (open ? window.innerWidth - drawerWidth : "100%") : '50vw', 
+              ...sidebarTransition('width')
+            }}
+          >
             PREVIEW
             <IconButton
               sx={{
                 borderRadius: '16px', 
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
+                position: 'absolute',
+                right: '16px',
                 width: 32, height: 32,
                 "& *": { fill: darkMode ? _.clr400 : _.clr500 },
                 "&:hover *": { fill: _.primary.main},

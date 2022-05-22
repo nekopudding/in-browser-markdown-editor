@@ -10,17 +10,22 @@ import theme, { _ } from 'theme';
 import Button from './Button';
 
 function Header(props) {
-  const {drawerWidth, open, setOpen, headerHeight, currFile, setCurrFile, saveFile, setDialogOpen} = props;
+  const {drawerWidth, open, setOpen, headerHeight, currFile, setCurrFile, saveFile, setDialogOpen, sidebarTransition} = props;
   
   function handleOpenDialog() {
     if (currFile.id === '-1') return;
     setDialogOpen(true)
   }
+
   return (
    <>
      <AppBar 
       position="fixed" 
-      sx={{pl: open ? drawerWidth + "px": 0, bgcolor: _.clr800, boxShadow: 'none'}}
+      sx={{
+        pl: open ? drawerWidth + "px": 0, 
+        bgcolor: _.clr800, boxShadow: 'none',
+        ...sidebarTransition('padding')
+      }}
     >
         <Toolbar 
           sx={{
