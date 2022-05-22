@@ -1,14 +1,13 @@
 import { Box, Typography, TextField, Divider, IconButton } from '@mui/material'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import theme from 'theme';
-import data from 'data.json'
 import { ReactMarkdown } from 'react-markdown/lib/react-markdown';
 import EditorHeader from './EditorHeader';
 import {ReactComponent as ShowPreviewIcon} from 'assets/icon-show-preview.svg';
 import {ReactComponent as HidePreviewIcon} from 'assets/icon-hide-preview.svg';
 
 
-const headerOffset = 48;
+const editorHeaderOffset = 48;
 const markdownStyle = {
   width: '50vw',
   p: 3,
@@ -38,8 +37,7 @@ const markdownStyle = {
 }
 
 function Editor(props) {
-  const {headerHeight,open, drawerWidth} = props;
-  const [text,setText] = useState(data[1].content);
+  const {headerHeight,open, drawerWidth, currFile, setCurrFile} = props;
   const [preview,setPreview] = useState(false);
 
   const editorStyle = {
@@ -63,33 +61,42 @@ function Editor(props) {
   }
 
   function handleChange(e) {
-    setText(e.target.value);
+    setCurrFile((prev) => {
+      console.log({...prev, content: e.target.value});
+      return ({...prev, content: e.target.value})
+    })
   }
+
+  useEffect(()=>{
+    setCurrFile((prev) => {
+      return ({...prev, content: " " + prev.content})
+    })
+  },[currFile,setCurrFile]);
+
   return (
     <>
       <Box sx={editorStyle}>
         <Box sx={{width: '50vw', overflowY: 'scroll', display: preview ? 'none' : 'block'}}>
-          <EditorHeader headerHeight={headerOffset} sx={{width: '50vw'}}>MARKDOWN</EditorHeader>
-          <Box sx={{height: headerOffset}}/>
+          <EditorHeader sx={{width: '50vw'}}>MARKDOWN</EditorHeader>
+          <Box sx={{height: editorHeaderOffset}}/>
           <TextField 
             sx={{
-              // height: '100%', 
               width:'100%',
               '& fieldset': { borderWidth: '0 !important'},
               '.MuiInputBase-root': {p: 0},
               '.MuiInputBase-root textarea': { p: 2 }
             }}
             multiline 
-            value={text} 
-            onChange={handleChange}
-
+            value={currFile.content} 
+            onInput={(e)=>handleChange(e)}
+            type="textarea"
             InputProps={{sx: {...theme.typography.code}}} 
             
           />
         </Box>
         <Divider orientation='vertical' sx={{borderColor: theme.palette.clr300, zIndex: 200}}/>
         <Box sx={{ width: preview ? '100%' : '50vw', overflowY: 'scroll', position: 'abosolute'}}>
-          <EditorHeader headerHeight={headerOffset} sx={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: preview ? '100%' : '50vw' }}>
+          <EditorHeader sx={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: preview ? '100%' : '50vw' }}>
             PREVIEW
             <IconButton
               sx={{
@@ -107,10 +114,10 @@ function Editor(props) {
               {preview ? <HidePreviewIcon/> : <ShowPreviewIcon/>}
             </IconButton>
           </EditorHeader>
-          <Box sx={{height: headerOffset}}/>
+          <Box sx={{height: editorHeaderOffset}}/>
           <Box sx={{display: 'flex', justifyContent:'center'}}>
             <Box sx={markdownStyle}>  
-              <ReactMarkdown>{text}</ReactMarkdown>
+              <ReactMarkdown>{currFile.content}</ReactMarkdown>
             </Box>
           </Box>
 

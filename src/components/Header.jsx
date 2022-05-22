@@ -10,7 +10,7 @@ import theme from 'theme';
 import Button from './Button';
 
 function Header(props) {
-  const {drawerWidth, open, setOpen, headerHeight} = props;
+  const {drawerWidth, open, setOpen, headerHeight, currFile, setCurrFile, handleSave, currFileContent, setCurrFileContent} = props;
   return (
    <>
      <AppBar 
@@ -59,8 +59,8 @@ function Header(props) {
                 }}>
                 <DeleteIcon/>
               </IconButton>
-              <Button sx={{height: '40px'}}>
-                <Box sx={{display: 'flex',alignItems: 'center', '& > * + *': {ml: 1}}}>
+              <Button sx={{height: '40px'}} onClick={handleSave}>
+                <Box sx={{display: 'flex',alignItems: 'center', '& > * + *': {ml: 1}}} >
                   <SaveIcon/> 
                   <span>Save Changes</span>
                 </Box>
@@ -74,7 +74,6 @@ function Header(props) {
             <Stack>
               <Typography variant='inAppBodyM' sx={{color: theme.palette.clr500}}>Document Name</Typography>
               <Input 
-                defaultValue='welcome.md' 
                 sx={{
                   '&::before': {borderBottom: 'none'},
                   '&::after': {borderBottom: '1px solid '+ theme.palette.clr100}
@@ -89,6 +88,8 @@ function Header(props) {
                     caretColor: theme.palette.primary.main
                   } 
                 }}
+                onChange={(e)=>setCurrFileContent(e.target.value)}
+                value={currFileContent}
               />
             </Stack>
           </ListItem>

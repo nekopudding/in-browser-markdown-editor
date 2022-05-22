@@ -6,7 +6,7 @@ import Button from './Button';
 import ModeToggle from './ModeToggle';
 
 function Sidebar(props) {
-  const {drawerWidth, open, setOpen, darkMode, setDarkMode} = props;
+  const {drawerWidth, open, setOpen, darkMode, setDarkMode, fileList, loadFile} = props;
   return (
     <>
       <Drawer
@@ -45,16 +45,16 @@ function Sidebar(props) {
               overflow: 'auto'
             }}
           >
-            {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-              <ListItem key={text} disablePadding sx={{pl: 3}}>
-                <ListItemButton sx={{p: 0, py: 1.5}}>
+            {fileList.map(({id,name,dateCreated}, index) => (
+              <ListItem key={id} disablePadding sx={{pl: 3}}>
+                <ListItemButton sx={{p: 0, py: 1.5}} onClick={()=>loadFile(id)}>
                   <ListItemIcon sx={{minWidth: 30}}>
                     <DocumentIcon />
                   </ListItemIcon>
                   <ListItemText 
-                    primary={"01 April 2022"} 
+                    primary={dateCreated} 
                     primaryTypographyProps={{variant: "inAppBodyM", sx: {color: theme.palette.clr500}}}
-                    secondary={text} 
+                    secondary={name} 
                     secondaryTypographyProps={{
                       variant: "inAppHeadingM", 
                       sx: {color: theme.palette.clr100, "&:hover":{color: theme.palette.primary.main}}
