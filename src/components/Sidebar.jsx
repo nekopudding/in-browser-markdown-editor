@@ -1,6 +1,6 @@
 import { Drawer,Box, Typography, ListItem,List,ListItemIcon,ListItemButton, ListItemText, Stack } from '@mui/material'
 import React from 'react';
-import theme from 'theme';
+import theme, {_} from 'theme';
 import {ReactComponent as DocumentIcon} from 'assets/icon-document.svg'
 import Button from './Button';
 import ModeToggle from './ModeToggle';
@@ -15,7 +15,6 @@ function Sidebar(props) {
           flexShrink: 0,
           '& .MuiDrawer-paper': {
             width: drawerWidth,
-            bgcolor: theme.palette.clr900,
           },
         }}
         variant="persistent"
@@ -32,7 +31,7 @@ function Sidebar(props) {
             ...theme.mixins.toolbar,
           }}
         >
-          <Typography variant='inAppHeadingS' sx={{color: theme.palette.clr500}}>MY DOCUMENTS</Typography>
+          <Typography variant='inAppHeadingS' sx={{}}>MY DOCUMENTS</Typography>
         </Box>
         <Box sx={{display: 'flex', justifyContent: 'center', pb: 1.5}}>
           <Button sx={{width: 202}} onClick={()=>createNewFile()}><Typography variant="inAppHeadingM">+ New Document</Typography></Button>
@@ -50,9 +49,9 @@ function Sidebar(props) {
                 <ListItemButton 
                   sx={{
                     p: 0, py: 1.5, pl: 3, 
-                    '&:hover .MuiListItemText-secondary': {color: theme.palette.primary.main},
+                    '&:hover .MuiListItemText-secondary': {color: _.primary.main},
                     '&.Mui-selected:hover, &.Mui-selected': {
-                      bgcolor: theme.palette.clr1000,
+                      bgcolor: _.clr1000,
                     },
                   }} 
                   onClick={()=>loadFile(id)}
@@ -63,11 +62,10 @@ function Sidebar(props) {
                   </ListItemIcon>
                   <ListItemText 
                     primary={dateCreated} 
-                    primaryTypographyProps={{variant: "inAppBodyM", sx: {color: theme.palette.clr500}}}
+                    primaryTypographyProps={{variant: "inAppBodyM"}}
                     secondary={name} 
                     secondaryTypographyProps={{
                       variant: "inAppHeadingM", 
-                      sx: {color: theme.palette.clr100}
                     }}
                     sx={{m: 0}}
                   />

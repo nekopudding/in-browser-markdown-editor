@@ -1,4 +1,4 @@
-import { AppBar,Toolbar,IconButton,Typography, Box, Divider, ListItem, ListItemButton, ListItemIcon, ListItemText, Input, Stack } from '@mui/material'
+import { AppBar,Toolbar,IconButton,Typography, Box, Divider, ListItem, ListItemIcon, Input, Stack } from '@mui/material'
 import React from 'react'
 import {ReactComponent as MenuIcon} from 'assets/icon-menu.svg';
 import {ReactComponent as CloseIcon} from 'assets/icon-close.svg';
@@ -6,7 +6,7 @@ import {ReactComponent as Logo} from 'assets/logo.svg';
 import {ReactComponent as DocumentIcon} from 'assets/icon-document.svg'
 import {ReactComponent as SaveIcon} from 'assets/icon-save.svg'
 import {ReactComponent as DeleteIcon} from 'assets/icon-delete.svg'
-import theme from 'theme';
+import theme, { _ } from 'theme';
 import Button from './Button';
 
 function Header(props) {
@@ -20,7 +20,7 @@ function Header(props) {
    <>
      <AppBar 
       position="fixed" 
-      sx={{pl: open ? drawerWidth + "px": 0, bgcolor: theme.palette.clr800, boxShadow: 'none'}}
+      sx={{pl: open ? drawerWidth + "px": 0, bgcolor: _.clr800, boxShadow: 'none'}}
     >
         <Toolbar 
           sx={{
@@ -36,9 +36,9 @@ function Header(props) {
               borderRadius: 0,
               width: headerHeight,
               height: headerHeight,
-              bgcolor: theme.palette.clr700,
+              bgcolor: _.clr700,
               "&:hover": {
-                bgcolor: theme.palette.primary.main
+                bgcolor: _.primary.main
               }
             }}
           >
@@ -47,7 +47,7 @@ function Header(props) {
           <Box sx={{ m: 3 }}>
             <Logo/>               
           </Box>
-          <Divider orientation='vertical' sx={{borderColor: theme.palette.clr600, width: '1px', height: '40px', borderWidth: '0 1px 0 0'}}/>
+          <Divider orientation='vertical' sx={{borderColor: _.clr600, width: '1px', height: '40px', borderWidth: '0 1px 0 0'}}/>
           <ListItem 
             disablePadding 
             sx={{pl: 3, py: 1.5}}
@@ -59,8 +59,8 @@ function Header(props) {
                   alignItems: 'center', 
                   m: 1.5, p:1.5, 
                   borderRadius: '22px',
-                  "& *": { fill: theme.palette.clr500 },
-                  "&:hover *": { fill: theme.palette.primary.main }
+                  "& *": { fill: _.clr500 },
+                  "&:hover *": { fill: _.primary.main }
                 }}
                 onClick={handleOpenDialog}  
               >
@@ -79,20 +79,20 @@ function Header(props) {
               <DocumentIcon />
             </ListItemIcon>
             <Stack>
-              <Typography variant='inAppBodyM' sx={{color: theme.palette.clr500}}>Document Name</Typography>
+              <Typography variant='inAppBodyM' sx={{color: _.clr500}}>Document Name</Typography>
               <Input 
                 sx={{
                   '&::before': {borderBottom: 'none'},
-                  '&::after': {borderBottom: '1px solid '+ theme.palette.clr100}
+                  '&::after': {borderBottom: '1px solid '+ _.clr100}
                 }}
                 inputProps={{ 
                   'aria-label': 'description', 
                   variant: "inAppHeadingM",
                   sx: {
-                    color: theme.palette.clr100,
+                    color: _.clr100,
                     ...theme.typography.inAppHeadingM,
                     pt: 0,
-                    caretColor: theme.palette.primary.main
+                    caretColor: _.primary.main
                   } 
                 }}
                 onChange={(e)=>setCurrFile((prev) => {

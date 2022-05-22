@@ -1,14 +1,24 @@
 import { Box, Typography } from '@mui/material'
 import React from 'react'
-import theme from 'theme'
+import {_} from 'theme'
 
 function EditorHeader(props) {
-  const {sx} = props;
+  const {sx, darkMode} = props;
+  let filteredProps = {};
+  for (const p in props) { 
+    if (p !== "darkMode")
+      filteredProps[p] = props[p]
+  }
+
   const headerHeight = 48;
   return (
     <>
-      <Box sx={{bgcolor: theme.palette.clr200, color: theme.palette.clr500, py: 1.5, px: 2, position: 'absolute', width: '100%', height: headerHeight,zIndex: 100, ...sx}}>
-        <Typography  {...props} variant='inAppHeadingS'/>
+      <Box sx={{
+        bgcolor: darkMode ? _.clr900 : _.clr200, 
+        color: darkMode ? _.clr400 : _.clr500, 
+        py: 1.5, px: 2, position: 'absolute', width: '100%', height: headerHeight,zIndex: 100, ...sx
+      }}>
+        <Typography {...filteredProps} variant='inAppHeadingS'/>
       </Box>
     </>
   )

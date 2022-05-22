@@ -2,7 +2,7 @@ import { Switch,Box } from '@mui/material'
 import {ReactComponent as LightIcon} from 'assets/icon-light-mode.svg'
 import {ReactComponent as DarkIcon} from 'assets/icon-dark-mode.svg'
 import React from 'react'
-import theme from 'theme'
+import { _ } from 'theme'
 
 function ModeToggle(props) {
   const {darkMode,setDarkMode} = props;
@@ -15,7 +15,7 @@ function ModeToggle(props) {
         ml: 1
       } 
     }}>
-      <DarkIcon fill={darkMode ? theme.palette.clr100 : theme.palette.clr600}/>
+      <DarkIcon fill={darkMode ? _.clr100 : _.clr600}/>
       <Switch 
         checked={!darkMode}
         onChange={()=>setDarkMode(!darkMode)}
@@ -33,7 +33,7 @@ function ModeToggle(props) {
           "& .MuiSwitch-thumb": {
             width: '12px',
             height: '12px',
-            color: theme.palette.clr100 + " !important"
+            color: _.clr100 + " !important"
           },
           "& .MuiSwitch-input": {
             height: '24px',
@@ -44,11 +44,11 @@ function ModeToggle(props) {
             p: '6px'
           },
           "& .MuiSwitch-track": {
-            bgcolor: theme.palette.clr600 + " !important"
+            bgcolor: _.clr600 + " !important"
           }
         }}
       />
-      <LightIcon fill={!darkMode ? theme.palette.clr100 : theme.palette.clr600} />
+      <LightIcon fill={!darkMode ? _.clr100 : _.clr600} />
     </Box>
   )
 }

@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import {Box, CssBaseline, ThemeProvider} from '@mui/material'
-import theme from 'theme';
+import lightTheme, { darkTheme } from 'theme';
 import Header from 'components/Header';
 import Sidebar from 'components/Sidebar';
 import Editor from 'components/Editor';
@@ -15,17 +15,13 @@ const headerHeight = 72;
 function App() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [dialogOpen, setDialogOpen] = useState(false)
-  const [darkMode, setDarkMode] = useState(true);
+  const [darkMode, setDarkMode] = useState(false);
 
   //list of files in localStorage
   const [fileList,setFileList] = useState([]);
 
   //current file info
   const [currFile,setCurrFile] = useState({id: '1',name: data[1].name, content: data[1].content})
-
-  const commonProps = {
-    darkMode: darkMode
-  }
 
   //init some files for first time visiters
   function initFiles() {
@@ -136,7 +132,7 @@ function App() {
 
   return (
    <>
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
       <CssBaseline/>
       <Box sx={{ display: 'flex' }}>
         <Header 
@@ -167,6 +163,7 @@ function App() {
           drawerWidth={drawerWidth}
           currFile={currFile}
           setCurrFile={setCurrFile}
+          darkMode={darkMode}
         />
         <DeleteDialog
           dialogOpen={dialogOpen}

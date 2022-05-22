@@ -1,6 +1,6 @@
-import { Box, Typography, TextField, Divider, IconButton } from '@mui/material'
+import { Box, TextField, Divider, IconButton } from '@mui/material'
 import React, { useEffect, useState } from 'react'
-import theme from 'theme';
+import theme, {_,darkTheme} from 'theme';
 import { ReactMarkdown } from 'react-markdown/lib/react-markdown';
 import EditorHeader from './EditorHeader';
 import {ReactComponent as ShowPreviewIcon} from 'assets/icon-show-preview.svg';
@@ -8,38 +8,42 @@ import {ReactComponent as HidePreviewIcon} from 'assets/icon-hide-preview.svg';
 
 
 const editorHeaderOffset = 48;
-const markdownStyle = {
-  width: '50vw',
-  p: 3,
-  ...theme.typography,
-  '& p,li,a,span': {...theme.typography.body},
-  '& blockquote, pre': {
-    bgcolor: theme.palette.clr200, 
-    p: 3, 
-    mx: 0,
-    borderRadius: '4px',
-  },
-  '& blockquote': { 
-    borderLeft: '4px ' + theme.palette.primary.main + ' solid',
-  },
-  '& blockquote *': {...theme.typography.bodyBold},
-  '& ul': {listStyle: 'none'},
-  '& ul li::before': {
-    content: '"\\2022"',  /* Add content: \2022 is the CSS Code/unicode for a bullet */
-    color: theme.palette.primary.main, /* Change the color */
-    fontWeight: 'bold', /* If you want it to be bold */
-    display: 'inline-block', /* Needed to add space between the bullet and the text */
-    width: '1em', /* Also needed for space (tweak if needed) */
-    ml: '-1em', /* Also needed for space (tweak if needed) */
-  },
-  '& > *:first-child': {mt: 0, pt: 0}, //remove top spacing of first element
-  // '& > *:last-child': {mb: 3, pb: 3},
-}
+
 
 function Editor(props) {
-  const {headerHeight,open, drawerWidth, currFile, setCurrFile} = props;
+  const {headerHeight,open, drawerWidth, currFile, setCurrFile, darkMode} = props;
   const [preview,setPreview] = useState(false);
   const [content,setContent] = useState("");
+
+  const markdownStyle = {
+    width: '50vw',
+    p: 3,
+    ...((darkMode ? darkTheme : theme).typography),
+    '& p,li,a,span': (darkMode ? darkTheme : theme).typography.body,
+    '& blockquote, pre': {
+      bgcolor: darkMode ? _.clr800 : _.clr200, 
+      p: 3, 
+      mx: 0,
+      borderRadius: '4px',
+    },
+    '& blockquote': { 
+      borderLeft: '4px ' + _.primary.main + ' solid',
+    },
+    '& code': {
+      color: darkMode ? _.clr100 : _.clr700,
+    },
+    '& blockquote *': (darkMode ? darkTheme : theme).typography.bodyBold,
+    '& ul': {listStyle: 'none'},
+    '& ul li::before': {
+      content: '"\\2022"',  //unicode for a bullet
+      color: _.primary.main, 
+      fontWeight: 'bold', 
+      display: 'inline-block', 
+      width: '1em', 
+      ml: '-1em', 
+    },
+    '& > *:first-child': {mt: 0, pt: 0}, //remove top spacing of first element
+  }
 
   const editorStyle = {
     mt: headerHeight + "px", 
@@ -76,7 +80,7 @@ function Editor(props) {
     <>
       <Box sx={editorStyle}>
         <Box sx={{width: '50vw', overflowY: 'scroll', display: preview ? 'none' : 'block'}}>
-          <EditorHeader sx={{width: '50vw'}}>MARKDOWN</EditorHeader>
+          <EditorHeader darkMode={darkMode} sx={{width: '50vw'}}>MARKDOWN</EditorHeader>
           <Box sx={{height: editorHeaderOffset}}/>
           <TextField 
             sx={{
@@ -88,12 +92,12 @@ function Editor(props) {
             multiline 
             value={content} 
             onInput={(e)=>handleChange(e)}
-            InputProps={{sx: {...theme.typography.code}}} 
+            InputProps={{sx: {...(darkMode ? darkTheme : theme).typography.code, caretColor: (darkMode ? darkTheme : theme).typography.code.color}}} 
           />
         </Box>
-        <Divider orientation='vertical' sx={{borderColor: theme.palette.clr300, zIndex: 200}}/>
+        <Divider orientation='vertical' sx={{borderColor: darkMode ? _.clr600 : _.clr300, zIndex: 200}}/>
         <Box sx={{ width: preview ? '100%' : '50vw', overflowY: 'scroll', position: 'abosolute'}}>
-          <EditorHeader sx={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: preview ? '100%' : '50vw' }}>
+          <EditorHeader darkMode={darkMode} sx={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: preview ? '100%' : '50vw' }}>
             PREVIEW
             <IconButton
               sx={{
@@ -102,8 +106,8 @@ function Editor(props) {
                 alignItems: 'center',
                 justifyContent: 'center',
                 width: 32, height: 32,
-                "& *": { fill: theme.palette.clr500 },
-                "&:hover *": { fill: theme.palette.primary.main},
+                "& *": { fill: darkMode ? _.clr400 : _.clr500 },
+                "&:hover *": { fill: _.primary.main},
                 "&:hover": {bgcolor: 'transparent'}
               }}
               onClick={()=>setPreview(!preview)}

@@ -1,48 +1,43 @@
 import { createTheme } from "@mui/material";
 
 const _ = {
-  palette: {
-    clr100: '#ffffff',
-    clr200: '#f5f5f5',
-    clr300: '#e4e4e4',
-    clr400: '#c1c4cb',
-    clr500: '#7c8187',
-    clr600: '#5a6069',
-    clr700: '#35393f',
-    clr800: '#2b2d31',
-    clr900: '#1d1f22',
-    clr1000: '#151619',
+  clr100: '#ffffff',
+  clr200: '#f5f5f5',
+  clr300: '#e4e4e4',
+  clr400: '#c1c4cb',
+  clr500: '#7c8187',
+  clr600: '#5a6069',
+  clr700: '#35393f',
+  clr800: '#2b2d31',
+  clr900: '#1d1f22',
+  clr1000: '#151619',
 
-    background: {
-      default: '#ffffff'
-    },
-    primary: {
-      main: '#ef6643',
-      light: '#f39765'
-    }
+  primary: {
+    main: '#ef6643',
+    light: '#f39765'
   }
 }
 
-const theme = createTheme({
-  mode: 'dark',
+const lightTheme = createTheme({
   palette: {
-    clr100: '#ffffff',
-    clr200: '#f5f5f5',
-    clr300: '#e4e4e4',
-    clr400: '#c1c4cb',
-    clr500: '#7c8187',
-    clr600: '#5a6069',
-    clr700: '#35393f',
-    clr800: '#2b2d31',
-    clr900: '#1d1f22',
-    clr1000: '#151619',
+    clr100: _.clr100,
+    clr200: _.clr200,
+    clr300: _.clr300,
+    clr400: _.clr400,
+    clr500: _.clr500,
+    clr600: _.clr600,
+    clr700: _.clr700,
+    clr800: _.clr800,
+    clr900: _.clr900,
+    clr1000: _.clr1000,
 
     background: {
-      default: '#ffffff'
+      default: _.clr100,
+      paper: _.clr900
     },
     primary: {
-      main: _.palette.primary.main,
-      light: '#f39765'
+      main: _.primary.main,
+      light: _.primary.light
     }
   },
   typography: {
@@ -50,53 +45,56 @@ const theme = createTheme({
     inAppHeadingM: {
       fontFamily: 'Roboto',
       fontWeight: 400,
-      fontSize: '15px'
+      fontSize: '15px',
+      color: _.clr100 + " !important"
     },
     inAppHeadingS: {
       fontFamily: 'Roboto',
       fontWeight: 500,
       fontSize: '14px',
-      letterSpacing: '2px'
+      letterSpacing: '2px',
+      color: _.clr500
     },
     inAppBodyM: {
       fontFamily: 'Roboto',
       fontWeight: 300,
-      fontSize: '13px'
+      fontSize: '13px',
+      color: _.clr500
     },
     h1: {
       fontWeight: 700,
       fontSize: '32px',
-      color: _.palette.clr700,
+      color: _.clr700,
       my: 2.5
     },
     h2: {
       fontWeight: 300,
       fontSize: '28px',
-      color: _.palette.clr700,
+      color: _.clr700,
       my: 2.5
     },
     h3: {
       fontWeight: 700,
       fontSize: '24px',
-      color: _.palette.clr700,
+      color: _.clr700,
       my: 2.5
     },
     h4: {
       fontWeight: 700,
       fontSize: '20px',
-      color: _.palette.clr700,
+      color: _.clr700,
       my: 2.5
     },
     h5: {
       fontWeight: 700,
       fontSize: '16px',
-      color: _.palette.clr700,
+      color: _.clr700,
       my: 2.5
     },
     h6: {
       fontWeight: 700,
       fontSize: '14px',
-      color: _.palette.primary.main,
+      color: _.primary.main,
       lineHeight: 1,
       my: 2.5
     },
@@ -104,22 +102,124 @@ const theme = createTheme({
       fontSize: '14px',
       fontWeight: 400,
       lineHeight: '24px',
-      color: _.palette.clr500
+      color: _.clr500
     },
     bodyBold: {
       fontSize: '14px',
       fontWeight: 700,
       lineHeight: '24px',
-      color: _.palette.clr700
+      color: _.clr700
     },
     code: {
       fontFamily: 'Roboto Mono',
       fontSize: '14px',
       fontWeight: 400,
       lineHeight: '24px',
-      color: _.palette.clr700
+      color: _.clr700
     }
   }
-})
+});
 
-export default theme;
+const darkTheme = createTheme({
+  palette: {
+    clr100: _.clr100,
+    clr200: _.clr200,
+    clr300: _.clr300,
+    clr400: _.clr400,
+    clr500: _.clr500,
+    clr600: _.clr600,
+    clr700: _.clr700,
+    clr800: _.clr800,
+    clr900: _.clr900,
+    clr1000: _.clr1000,
+
+    background: {
+      default: _.clr1000,
+      paper: _.clr900
+    },
+    primary: {
+      main: _.primary.main,
+      light: _.primary.light
+    }
+  },
+  typography: {
+    fontFamily: 'Roboto Slab',
+    inAppHeadingM: {
+      fontFamily: 'Roboto',
+      fontWeight: 400,
+      fontSize: '15px',
+      color: _.clr100 + " !important"
+    },
+    inAppHeadingS: {
+      fontFamily: 'Roboto',
+      fontWeight: 500,
+      fontSize: '14px',
+      letterSpacing: '2px',
+      color: _.clr400
+    },
+    inAppBodyM: {
+      fontFamily: 'Roboto',
+      fontWeight: 300,
+      fontSize: '13px',
+      color: _.clr500
+    },
+    h1: {
+      fontWeight: 700,
+      fontSize: '32px',
+      color: _.clr100,
+      my: 2.5
+    },
+    h2: {
+      fontWeight: 300,
+      fontSize: '28px',
+      color: _.clr100,
+      my: 2.5
+    },
+    h3: {
+      fontWeight: 700,
+      fontSize: '24px',
+      color: _.clr100,
+      my: 2.5
+    },
+    h4: {
+      fontWeight: 700,
+      fontSize: '20px',
+      color: _.clr100,
+      my: 2.5
+    },
+    h5: {
+      fontWeight: 700,
+      fontSize: '16px',
+      color: _.clr100,
+      my: 2.5
+    },
+    h6: {
+      fontWeight: 700,
+      fontSize: '14px',
+      color: _.primary.main,
+      lineHeight: 1,
+      my: 2.5
+    },
+    body: {
+      fontSize: '14px',
+      fontWeight: 400,
+      lineHeight: '24px',
+      color: _.clr400
+    },
+    bodyBold: {
+      fontSize: '14px',
+      fontWeight: 700,
+      lineHeight: '24px',
+      color: _.clr100
+    },
+    code: {
+      fontFamily: 'Roboto Mono',
+      fontSize: '14px',
+      fontWeight: 400,
+      lineHeight: '24px',
+      color: _.clr400
+    }
+  }
+});
+
+export {lightTheme as default, darkTheme, _};
