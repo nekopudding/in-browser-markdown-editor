@@ -36,7 +36,6 @@ function Editor(props) {
     '& ul li::before': {
       content: '"\\2022"',  //unicode for a bullet
       fontFamily: 'Roboto Slab',
-      position: 'absolute',
       color: _.primary.main, 
       fontWeight: 900, 
       display: 'inline-block', 
