@@ -32,11 +32,12 @@ function Editor(props) {
       color: darkMode ? _.clr100 : _.clr700,
     },
     '& blockquote *': (darkMode ? darkTheme : theme).typography.bodyBold,
-    '& ul': {listStyle: 'none'},
+    '& ul': {listStyle: 'none',position: 'relative',},
     '& ul li::before': {
       content: '"\\2022"',  //unicode for a bullet
-      fontFamily: 'Roboto Slab',
+      fontFamily: 'Roboto Slab', 
       color: _.primary.main, 
+      position: 'absolute',
       fontWeight: 900, 
       display: 'inline-block', 
       width: '1em', 
