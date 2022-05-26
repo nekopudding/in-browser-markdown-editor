@@ -1,6 +1,7 @@
 import React from 'react'
 import {Button as MuiButton} from '@mui/material'
 import theme from 'theme'
+import isTouchDevice from 'utils/detectTouchDevice';
 
 function Button(props) {
   const {sx, variant} = props;
@@ -15,10 +16,11 @@ function Button(props) {
         boxShadow: 'none',
         ...theme.typography.inAppHeadingM,
         textTransform: 'none',
-        '&:hover': {
-          bgcolor: theme.palette.primary.light,
-          boxShadow: 'none'
-        },
+        ...(!isTouchDevice() && {
+          '&:hover': {
+            bgcolor: theme.palette.primary.light,
+            boxShadow: 'none'
+          }}),
         ...sx
       }} 
     />

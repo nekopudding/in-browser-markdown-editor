@@ -5,6 +5,7 @@ import { ReactMarkdown } from 'react-markdown/lib/react-markdown';
 import EditorHeader from './EditorHeader';
 import {ReactComponent as ShowPreviewIcon} from 'assets/icon-show-preview.svg';
 import {ReactComponent as HidePreviewIcon} from 'assets/icon-hide-preview.svg';
+import isTouchDevice from 'utils/detectTouchDevice';
 
 
 const editorHeaderOffset = 48;
@@ -13,6 +14,7 @@ const editorHeaderOffset = 48;
 function Editor(props) {
   const {headerHeight,open, drawerWidth, currFile, darkMode, sidebarTransition,content,setContent} = props;
   const [preview,setPreview] = useState(false);
+  const [windowD, setWindowD] = useState({width: window.innerWidth, height: window.innerHeight})
 
   const markdownStyle = {
     width: '50vw',
@@ -48,7 +50,7 @@ function Editor(props) {
   const editorStyle = {
     width: '100vw', 
     mt: headerHeight + "px", 
-    height: window.innerHeight - headerHeight, 
+    height: windowD.height - headerHeight, 
     display:'flex',
     flexGrow: 1,
     ml: open ? 0 : `-${drawerWidth}px`,
@@ -62,6 +64,12 @@ function Editor(props) {
   useEffect(()=>{
     setContent(currFile.content);
   },[currFile]);
+
+  useEffect(()=>{
+    window.addEventListener('resize', () => {
+      setWindowD({width: window.innerWidth, height: window.innerHeight});
+    })
+  },[]) //always sync to current window size
 
   return (
     <>
@@ -90,7 +98,7 @@ function Editor(props) {
               display: 'flex', 
               justifyContent: 'space-between', 
               alignItems: 'center', 
-              width: preview ? (open ? window.innerWidth - drawerWidth : "100%") : '50vw', 
+              width: preview ? (open ? windowD.width - drawerWidth : "100%") : '50vw', 
               ...sidebarTransition('width')
             }}
           >
@@ -102,8 +110,10 @@ function Editor(props) {
                 right: '16px',
                 width: 32, height: 32,
                 "& *": { fill: darkMode ? _.clr400 : _.clr500 },
-                "&:hover *": { fill: _.primary.main},
-                "&:hover": {bgcolor: 'transparent'}
+                ...(!isTouchDevice() && {
+                  "&:hover *": {fill: _.primary.main},
+                  "&:hover": {bgcolor: 'transparent'}
+                }),
               }}
               onClick={()=>setPreview(!preview)}
             >

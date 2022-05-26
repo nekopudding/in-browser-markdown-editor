@@ -107,6 +107,27 @@ useEffect(()=>{
 - configured how fileList in sidebar should overflow by nesting all elements under stack, using overflow auto
 - realized that the direct child of the sidebar header cannot set height - set height in typography to match height of header
 
+- disabling hover effects based on device width
+```js
+ "&:hover *": {[theme.breakpoints.up('md')]: { fill: _.primary.main}},
+ ```
+ - disabling hover based on touch detection 
+ ```js
+ export default function isTouchDevice() {
+  return (('ontouchstart' in window) ||
+     (navigator.maxTouchPoints > 0) ||
+     (navigator.msMaxTouchPoints > 0));
+}
+ ```
+ - resize editor to window size by keeping track of window dimension
+ ```js
+ useEffect(()=>{
+    window.addEventListener('resize', () => {
+      setWindowD({width: window.innerWidth, height: window.innerHeight});
+    })
+  },[]) //always sync to current window size
+```
+
 Use this section to recap over some of your major learnings while working through this project. Writing these out and providing code samples of areas you want to highlight is a great way to reinforce your own knowledge.
 
 To see how you can add code snippets, see below:

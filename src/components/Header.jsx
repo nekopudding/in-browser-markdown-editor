@@ -8,6 +8,7 @@ import {ReactComponent as SaveIcon} from 'assets/icon-save.svg'
 import {ReactComponent as DeleteIcon} from 'assets/icon-delete.svg'
 import theme, { _ } from 'theme';
 import Button from './Button';
+import isTouchDevice from 'utils/detectTouchDevice';
 
 function Header(props) {
   const {drawerWidth, open, setOpen, headerHeight, currFile, setCurrFile, saveFile, setDialogOpen, sidebarTransition} = props;
@@ -42,9 +43,9 @@ function Header(props) {
               width: headerHeight,
               height: headerHeight,
               bgcolor: _.clr700,
-              "&:hover": {
-                bgcolor: _.primary.main
-              }
+              ...(!isTouchDevice() && {
+                "&:hover": { bgcolor: _.primary.main }
+              }),
             }}
           >
             {open ? <CloseIcon/> : <MenuIcon/>}
@@ -65,7 +66,9 @@ function Header(props) {
                   m: 1.5, p:1.5, 
                   borderRadius: '22px',
                   "& *": { fill: _.clr500 },
-                  "&:hover *": { fill: _.primary.main }
+                  ...(!isTouchDevice() && {
+                    "&:hover *": { fill: _.primary.main }
+                  }),
                 }}
                 onClick={handleOpenDialog}  
               >

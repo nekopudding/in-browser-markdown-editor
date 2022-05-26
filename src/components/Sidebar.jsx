@@ -4,6 +4,7 @@ import theme, {_} from 'theme';
 import {ReactComponent as DocumentIcon} from 'assets/icon-document.svg'
 import Button from './Button';
 import ModeToggle from './ModeToggle';
+import isTouchDevice from 'utils/detectTouchDevice';
 
 function Sidebar(props) {
   const {drawerWidth, open, darkMode, setDarkMode, fileList, loadFile, createNewFile, currFile, headerHeight} = props;
@@ -42,7 +43,9 @@ function Sidebar(props) {
                 <ListItemButton 
                   sx={{
                     p: 0, py: 1.5, px: 3, 
-                    '&:hover .MuiListItemText-secondary': {color: _.primary.main},
+                    ...(!isTouchDevice() && {
+                      '&:hover .MuiListItemText-secondary': {color: _.primary.main},
+                    }),
                     '&.Mui-selected:hover, &.Mui-selected': {
                       bgcolor: _.clr1000,
                     },
