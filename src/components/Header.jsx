@@ -11,7 +11,7 @@ import Button from './Button';
 import isTouchDevice from 'utils/detectTouchDevice';
 
 function Header(props) {
-  const {drawerWidth, open, setOpen, headerHeight, currFile, setCurrFile, saveFile, setDialogOpen, sidebarTransition} = props;
+  const {drawerWidth, open, setOpen, headerHeight, currFile, setCurrFile, saveFile, setDialogOpen, sidebarTransition, windowD} = props;
   
   function handleOpenDialog() {
     if (currFile.id === '-1') return;
@@ -32,6 +32,7 @@ function Header(props) {
           sx={{
             height: headerHeight, 
             p: 0 + " !important",
+            display: 'flex'
           }}
         >
           <IconButton
@@ -50,44 +51,19 @@ function Header(props) {
           >
             {open ? <CloseIcon/> : <MenuIcon/>}
           </IconButton>
-          <Box sx={{ m: 3 }}>
+          <Box sx={{ m: 3, display: {mobile: 'none', laptop: 'block'} }}>
             <Logo/>               
           </Box>
-          <Divider orientation='vertical' sx={{borderColor: _.clr600, width: '1px', height: '40px', borderWidth: '0 1px 0 0'}}/>
-          <ListItem 
-            disablePadding 
-            sx={{pl: 3, py: 1.5}}
-            secondaryAction={
-              <Box sx={{display: 'flex', alignItems: 'center'}}>
-              <IconButton 
-                sx={{
-                  display: 'flex', 
-                  alignItems: 'center', 
-                  m: 1.5, p:1.5, 
-                  borderRadius: '22px',
-                  "& *": { fill: _.clr500 },
-                  ...(!isTouchDevice() && {
-                    "&:hover *": { fill: _.primary.main }
-                  }),
-                }}
-                onClick={handleOpenDialog}  
-              >
-                <DeleteIcon/>
-              </IconButton>
-              <Button sx={{height: '40px'}} onClick={saveFile}>
-                <Box sx={{display: 'flex',alignItems: 'center', '& > * + *': {ml: 1}}} >
-                  <SaveIcon/> 
-                  <span>Save Changes</span>
-                </Box>
-              </Button>
-              </Box>
-            }
-          >
+          <Divider 
+            orientation='vertical' 
+            sx={{borderColor: _.clr600, width: '1px', height: '40px', borderWidth: '0 1px 0 0', display: {mobile: 'none', laptop: 'block'} }}
+          />
+          <Box sx={{display: 'flex', px: 3, alignItems: 'center', flexGrow: 1}}>
             <ListItemIcon sx={{minWidth: 30}}>
               <DocumentIcon />
             </ListItemIcon>
-            <Stack sx={{width: 400}}>
-              <Typography variant='inAppBodyM' sx={{color: _.clr500}}>Document Name</Typography>
+            <Stack sx={{width: {mobile: 'auto', laptop: 400}, mr: 1}}>
+              <Typography variant='inAppBodyM' sx={{color: _.clr500, display: {mobile: 'none', tablet:'block'} }}>Document Name</Typography>
               <Input 
                 sx={{
                   '&::before': {borderBottom: 'none'},
@@ -100,7 +76,8 @@ function Header(props) {
                     color: _.clr100,
                     ...theme.typography.inAppHeadingM,
                     pt: 0,
-                    caretColor: _.primary.main
+                    caretColor: _.primary.main,
+                    pb: 0
                   } 
                 }}
                 onChange={(e)=>setCurrFile((prev) => {
@@ -109,7 +86,35 @@ function Header(props) {
                 value={currFile.name}
               />
             </Stack>
-          </ListItem>
+            <Box sx={{flexGrow: 1}}/>
+            <Box sx={{display: 'flex', alignItems: 'center'}}>
+                <IconButton 
+                  sx={{
+                    display: 'flex', 
+                    alignItems: 'center', 
+                    m: 1.5, p:1.5, 
+                    borderRadius: '22px',
+                    "& *": { fill: _.clr500 },
+                    ...(!isTouchDevice() && {
+                      "&:hover *": { fill: _.primary.main }
+                    }),
+                  }}
+                  onClick={handleOpenDialog}  
+                >
+                  <DeleteIcon/>
+                </IconButton>
+                <Button 
+                  sx={{
+                    height: '40px', width: {mobile: 40, tablet: 152}, minWidth: 'auto',
+                    display: 'flex',alignItems: 'center'
+                  }} 
+                  onClick={saveFile}
+                >
+                    <SaveIcon/> 
+                    {(windowD.width > theme.breakpoints.values.tablet) && <Typography variant='inAppHeadingM' sx={{ml: 1}}>Save Changes</Typography>}
+                </Button>
+              </Box>
+          </Box>
         </Toolbar>
       </AppBar>
    </>

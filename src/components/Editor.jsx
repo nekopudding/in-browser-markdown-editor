@@ -12,13 +12,14 @@ const editorHeaderOffset = 48;
 
 
 function Editor(props) {
-  const {headerHeight,open, drawerWidth, currFile, darkMode, sidebarTransition,content,setContent} = props;
+  const {headerHeight,open, drawerWidth, currFile, darkMode, sidebarTransition,content,setContent, windowD} = props;
   const [preview,setPreview] = useState(false);
-  const [windowD, setWindowD] = useState({width: window.innerWidth, height: window.innerHeight})
+  
 
   const markdownStyle = {
-    width: '50vw',
+    width: '100%',
     p: 3,
+    mx: preview ? {mobile:'auto',tablet: 3, desktop: '25%'} : 'auto',
     ...((darkMode ? darkTheme : theme).typography),
     '& p,li,a,span': (darkMode ? darkTheme : theme).typography.body,
     '& blockquote, pre': {
@@ -32,6 +33,9 @@ function Editor(props) {
     },
     '& code': {
       color: darkMode ? _.clr100 : _.clr700,
+    },
+    '& pre': { //scroll for code blocks
+      overflowX: 'auto',
     },
     '& blockquote *': (darkMode ? darkTheme : theme).typography.bodyBold,
     '& ul': {listStyle: 'none',position: 'relative',},
@@ -49,12 +53,14 @@ function Editor(props) {
   }
   const editorStyle = {
     width: '100vw', 
+    overflowX: open ? 'hidden' : 'visible',
+    position: 'relative',
     mt: headerHeight + "px", 
     height: windowD.height - headerHeight, 
     display:'flex',
     flexGrow: 1,
     ml: open ? 0 : `-${drawerWidth}px`,
-    ...sidebarTransition('margin')
+    ...sidebarTransition('margin'),
   }
 
   function handleChange(e) {
@@ -65,17 +71,40 @@ function Editor(props) {
     setContent(currFile.content);
   },[currFile]);
 
-  useEffect(()=>{
-    window.addEventListener('resize', () => {
-      setWindowD({width: window.innerWidth, height: window.innerHeight});
-    })
-  },[]) //always sync to current window size
+
 
   return (
     <>
       <Box sx={editorStyle}>
-        <Box sx={{width: '50vw', overflowY: 'scroll', display: preview ? 'none' : 'block'}}>
-          <EditorHeader darkMode={darkMode} sx={{width: '50vw'}}>MARKDOWN</EditorHeader>
+        <Box 
+          sx={{
+            width: {mobile: '100%', tablet: '50vw'}, 
+            overflowY: 'scroll', 
+            WebkitOverflowScrolling: 'touch',
+            display: preview ? 'none' : 'block',
+          }}>
+          <EditorHeader darkMode={darkMode} sx={{width: {mobile: '100%', tablet: '50vw'},display: 'flex', 
+              justifyContent: 'space-between', 
+              alignItems: 'center', }}>
+            MARKDOWN
+            <IconButton
+              sx={{
+                borderRadius: '16px', 
+                position: 'absolute',
+                right: '16px',
+                width: 32, height: 32,
+                "& *": { fill: darkMode ? _.clr400 : _.clr500 },
+                ...(!isTouchDevice() && {
+                  "&:hover *": {fill: _.primary.main},
+                  "&:hover": {bgcolor: 'transparent'}
+                }),
+                display: (preview || open) ? 'none' : {mobile: 'inline-flex', tablet: 'none'},
+              }}
+              onClick={()=>setPreview(!preview)}
+            >
+              <ShowPreviewIcon/>
+            </IconButton>
+          </EditorHeader>
           <Box sx={{height: editorHeaderOffset}}/>
           <TextField 
             sx={{
@@ -91,14 +120,20 @@ function Editor(props) {
           />
         </Box>
         <Divider orientation='vertical' sx={{borderColor: darkMode ? _.clr600 : _.clr300, zIndex: 200, display: preview ? 'none' : 'block'}}/>
-        <Box sx={{ width: preview ? '100%' : '50vw', overflowY: 'scroll', position: 'abosolute'}}>
+        <Box 
+          sx={{ 
+            width: preview ? '100%' : '50vw', 
+            overflowY: 'scroll', WebkitOverflowScrolling: 'touch',
+            display: preview ? 'block' : {mobile: 'none', tablet: 'block'},
+          }}
+        >
           <EditorHeader 
             darkMode={darkMode} 
             sx={{
               display: 'flex', 
               justifyContent: 'space-between', 
               alignItems: 'center', 
-              width: preview ? (open ? windowD.width - drawerWidth : "100%") : '50vw', 
+              width: preview ? (open ? {mobile: '100%', tablet: windowD.width - drawerWidth} : "100%") : '50vw', 
               ...sidebarTransition('width')
             }}
           >
@@ -114,6 +149,7 @@ function Editor(props) {
                   "&:hover *": {fill: _.primary.main},
                   "&:hover": {bgcolor: 'transparent'}
                 }),
+                display: (open) ? 'none' : 'inline-flex',
               }}
               onClick={()=>setPreview(!preview)}
             >

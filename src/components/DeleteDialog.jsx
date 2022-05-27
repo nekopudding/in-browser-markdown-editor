@@ -7,7 +7,7 @@ function DeleteDialog(props) {
   const {dialogOpen,setDialogOpen,handleConfirmDelete, currFile} = props;
   return (
     <>
-              <Modal
+        <Modal
           open={dialogOpen}
           onClose={()=>setDialogOpen(false)}
           aria-labelledby="confirm deletion"

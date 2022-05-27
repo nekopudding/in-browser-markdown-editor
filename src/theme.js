@@ -19,25 +19,19 @@ const _ = {
 }
 
 const lightTheme = createTheme({
+  breakpoints: {
+    values: {
+      mobile: 0,
+      tablet: 768,
+      laptop: 1024,
+      desktop: 1200,
+    },
+  },
   palette: {
-    clr100: _.clr100,
-    clr200: _.clr200,
-    clr300: _.clr300,
-    clr400: _.clr400,
-    clr500: _.clr500,
-    clr600: _.clr600,
-    clr700: _.clr700,
-    clr800: _.clr800,
-    clr900: _.clr900,
-    clr1000: _.clr1000,
-
+    ..._,
     background: {
       default: _.clr100,
       paper: _.clr900
-    },
-    primary: {
-      main: _.primary.main,
-      light: _.primary.light
     }
   },
   typography: {
@@ -121,26 +115,20 @@ const lightTheme = createTheme({
 });
 
 const darkTheme = createTheme({
+  breakpoints: {
+    values: {
+      mobile: 0,
+      tablet: 768,
+      laptop: 1024,
+      desktop: 1200,
+    },
+  },
   palette: {
-    clr100: _.clr100,
-    clr200: _.clr200,
-    clr300: _.clr300,
-    clr400: _.clr400,
-    clr500: _.clr500,
-    clr600: _.clr600,
-    clr700: _.clr700,
-    clr800: _.clr800,
-    clr900: _.clr900,
-    clr1000: _.clr1000,
-
+    ..._,
     background: {
       default: _.clr1000,
       paper: _.clr900
     },
-    primary: {
-      main: _.primary.main,
-      light: _.primary.light
-    }
   },
   typography: {
     fontFamily: 'Roboto Slab',

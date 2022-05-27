@@ -24,6 +24,13 @@ function App() {
   const [currFile,setCurrFile] = useState({id: '1',name: data[1].name, content: data[1].content})
   const [content,setContent] = useState(""); //middleman for holding content to prevent over-rendering
 
+  const [windowD, setWindowD] = useState({width: window.innerWidth, height: window.innerHeight})
+  useEffect(()=>{
+    window.addEventListener('resize', () => {
+      setWindowD({width: window.innerWidth, height: window.innerHeight});
+    })
+  },[]) //always sync to current window size
+
   //init some files for first time visiters
   function initFiles() {
       console.log("initializing sample files...");
@@ -150,19 +157,7 @@ function App() {
    <>
     <ThemeProvider theme={darkMode ? darkTheme : theme}>
       <CssBaseline/>
-      <Box sx={{ display: 'flex' }}>
-        <Header 
-          open={sidebarOpen} 
-          setOpen={setSidebarOpen} 
-          drawerWidth={drawerWidth} 
-          headerHeight={headerHeight}
-          currFile={currFile}
-          setCurrFile={setCurrFile}
-          saveFile={saveFile}
-          deleteFile={deleteFile}
-          setDialogOpen={setDialogOpen}
-          sidebarTransition={sidebarTransition}
-        /> 
+      <Box sx={{ display: 'flex'}}>
         <Sidebar 
           open={sidebarOpen} 
           setOpen={setSidebarOpen} 
@@ -175,6 +170,19 @@ function App() {
           currFile={currFile}
           headerHeight={headerHeight}
         />
+        <Header 
+          open={sidebarOpen} 
+          setOpen={setSidebarOpen} 
+          drawerWidth={drawerWidth} 
+          headerHeight={headerHeight}
+          currFile={currFile}
+          setCurrFile={setCurrFile}
+          saveFile={saveFile}
+          deleteFile={deleteFile}
+          setDialogOpen={setDialogOpen}
+          sidebarTransition={sidebarTransition}
+          windowD={windowD}
+        /> 
         <Editor 
           headerHeight={headerHeight} 
           open={sidebarOpen} 
@@ -185,6 +193,7 @@ function App() {
           sidebarTransition={sidebarTransition}
           content={content}
           setContent={setContent}
+          windowD={windowD}
         />
         <DeleteDialog
           dialogOpen={dialogOpen}

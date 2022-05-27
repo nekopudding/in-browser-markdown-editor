@@ -11,6 +11,7 @@ function Button(props) {
       {...props}
       variant={variant || 'contained'}
       sx={{
+        px: {mobile: 0, tablet: 2},
         color: theme.palette.clr100,
         bgcolor: theme.palette.primary.main,
         boxShadow: 'none',

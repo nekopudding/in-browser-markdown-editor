@@ -71,7 +71,7 @@ function Sidebar(props) {
               </ListItem>
             ))}
           </List>
-          <Box sx={{p: 3,}}>
+          <Box sx={{p: 3, mb: {mobile: 3, laptop: 0}}}> 
               <ModeToggle darkMode={darkMode} setDarkMode={setDarkMode}/>
           </Box>
           
