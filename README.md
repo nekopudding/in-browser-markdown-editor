@@ -12,7 +12,6 @@ This is a solution to the [In-browser markdown editor challenge on Frontend Ment
   - [Built with](#built-with)
   - [What I learned](#what-i-learned)
   - [Continued development](#continued-development)
-  - [Useful resources](#useful-resources)
 - [Author](#author)
 
 ## Overview
@@ -99,11 +98,6 @@ let filteredProps = {};
 ### Continued development
 
 I will focus on refactoring components and the planning aspect of designing my code in order to make my future development processes more structurally organized.
-
-### Useful resources
-
-- [Example resource 1](https://www.example.com) - This helped me for XYZ reason. I really liked this pattern and will use it going forward.
-- [Example resource 2](https://www.example.com) - This is an amazing article which helped me finally understand XYZ. I'd recommend it to anyone still learning this concept.
 
 ## Author
 
