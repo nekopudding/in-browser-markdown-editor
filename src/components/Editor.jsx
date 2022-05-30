@@ -116,7 +116,12 @@ function Editor(props) {
             multiline 
             value={content} 
             onInput={(e)=>handleChange(e)}
-            InputProps={{sx: {...(darkMode ? darkTheme : theme).typography.code, caretColor: (darkMode ? darkTheme : theme).typography.code.color}}} 
+            InputProps={{
+              sx: {...(darkMode ? darkTheme : theme).typography.code, caretColor: (darkMode ? darkTheme : theme).typography.code.color}
+            }} 
+            inputProps={{
+              'aria-label': 'markdown input'
+            }}
           />
         </Box>
         <Divider orientation='vertical' sx={{borderColor: darkMode ? _.clr600 : _.clr300, zIndex: 200, display: preview ? 'none' : 'block'}}/>
@@ -151,6 +156,7 @@ function Editor(props) {
                 }),
                 display: (open) ? 'none' : 'inline-flex',
               }}
+              aria-label="fullscreen markdown preview"
               onClick={()=>setPreview(!preview)}
             >
               {preview ? <HidePreviewIcon/> : <ShowPreviewIcon/>}

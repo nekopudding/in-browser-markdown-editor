@@ -19,6 +19,7 @@ function ModeToggle(props) {
       <Switch 
         checked={!darkMode}
         onChange={()=>setDarkMode(!darkMode)}
+        aria-label="toggle light/dark mode"
         sx={{
           p: 0, 
           height: 24,

@@ -70,8 +70,7 @@ function Header(props) {
                   '&::after': {borderBottom: '1px solid '+ _.clr100}
                 }}
                 inputProps={{ 
-                  'aria-label': 'description', 
-                  variant: "inAppHeadingM",
+                  'aria-label': 'input file name', 
                   sx: {
                     color: _.clr100,
                     ...theme.typography.inAppHeadingM,
@@ -99,6 +98,7 @@ function Header(props) {
                       "&:hover *": { fill: _.primary.main }
                     }),
                   }}
+                  aria-label="delete document"
                   onClick={handleOpenDialog}  
                 >
                   <DeleteIcon/>
@@ -108,6 +108,7 @@ function Header(props) {
                     height: '40px', width: {mobile: 40, tablet: 152}, minWidth: 'auto',
                     display: 'flex',alignItems: 'center'
                   }} 
+                  aria-label="save changes"
                   onClick={saveFile}
                 >
                     <SaveIcon/> 

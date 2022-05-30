@@ -29,7 +29,7 @@ function Sidebar(props) {
             <Typography variant='inAppHeadingS' sx={{pl: 3, height: headerHeight, display: 'flex', alignItems: 'center'}}>MY DOCUMENTS</Typography>
           </Box>
           <Box sx={{display: 'flex', justifyContent: 'center', px: 3, pb: 1.5}}>
-            <Button sx={{width: 202}} onClick={()=>createNewFile()}><Typography variant="inAppHeadingM">+ New Document</Typography></Button>
+            <Button aria-label="create new document" sx={{width: 202}} onClick={()=>createNewFile()}><Typography variant="inAppHeadingM">+ New Document</Typography></Button>
           </Box>
           <List 
             sx={{

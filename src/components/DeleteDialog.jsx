@@ -30,7 +30,7 @@ function DeleteDialog(props) {
             <Typography variant="body" sx={{ display: 'block'}}>
               Are you sure you want to delete ‘{currFile.name}’ document and its contents? This action cannot be reversed.
             </Typography>
-            <Button onClick={handleConfirmDelete}>Confirm & Delete</Button>
+            <Button onClick={handleConfirmDelete} aria-label="delete document">Confirm & Delete</Button>
           </Stack>
         </Modal>
     </>
