@@ -84,7 +84,7 @@ function App() {
   },[])
 
   function saveFile() {
-    if (currFile.id === -1) return; //uninitialized file
+    if (currFile.id === '-1') return; //uninitialized file
 
     const resolvedFile = {
       id: currFile.id,
