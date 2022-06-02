@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import {Box, CssBaseline, ThemeProvider} from '@mui/material'
+import {Box, CssBaseline, ThemeProvider,Snackbar} from '@mui/material'
 import theme, { darkTheme } from 'theme';
 import Header from 'components/Header';
 import Sidebar from 'components/Sidebar';
@@ -8,6 +8,7 @@ import data from 'data.json'
 import { v4 as uuid } from 'uuid';
 import formatDate from 'utils/formatDate';
 import DeleteDialog from 'components/DeleteDialog';
+import Grow from '@mui/material/Grow';
 
 const drawerWidth = 250;
 const headerHeight = 72;
@@ -16,6 +17,7 @@ function App() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [dialogOpen, setDialogOpen] = useState(false)
   const [darkMode, setDarkMode] = useState(false);
+  const [snackBar,setSnackbar] = useState({open: false, msg: 'File saved!'});
 
   //list of files in localStorage
   const [fileList,setFileList] = useState([]);
@@ -82,6 +84,8 @@ function App() {
   },[])
 
   function saveFile() {
+    if (currFile.id === -1) return; //uninitialized file
+
     const resolvedFile = {
       id: currFile.id,
       name: resolveFilename(currFile.name, currFile.id),
@@ -97,6 +101,7 @@ function App() {
     setFileList(updatedList);
     setCurrFile(resolvedFile);
     localStorage.setItem("files", JSON.stringify(updatedList));
+    setSnackbar({open: true, msg: 'File saved!'});
     
     console.log('saving file: ' + resolvedFile.name + " | id: " + resolvedFile.id);
   }
@@ -125,6 +130,7 @@ function App() {
       name: '',
       content: ''
     })
+    setSnackbar({open: true, msg: 'File deleted'})
   }
   function resolveFilename(filename,id,n = 0) {
     if (fileList.filter(file => file.id !== id && file.name === filename).length !== 0) { //if there is a different file with same name
@@ -200,6 +206,13 @@ function App() {
           setDialogOpen={setDialogOpen}
           handleConfirmDelete={handleConfirmDelete}
           currFile={currFile}
+        />
+        <Snackbar
+          open={snackBar.open}
+          autoHideDuration={4000}
+          onClose={()=> setSnackbar({...snackBar, open: false})}
+          message={snackBar.msg}
+          sx={{width: '200px', ...theme.typography.inAppBodyM, right: '16px', left: 'auto', bottom: '16px'}}
         />
       </Box>
     </ThemeProvider>
